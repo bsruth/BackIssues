@@ -1,14 +1,14 @@
 package brian.ruth.backissues;
 
 import android.content.ContentValues;
+import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
-import android.widget.CursorAdapter;
-import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.*;
 
 public class ComicSeriesListingActivity extends Activity {
 
@@ -21,6 +21,26 @@ public class ComicSeriesListingActivity extends Activity {
         setContentView(R.layout.activity_comic_series_listing);
 
         mBackIssuesDatabase = new BackIssuesDBHelper(this);
+
+        Cursor c = RefreshListCursor();
+
+        final ListView lv = (ListView)findViewById(R.id.comic_series_list);
+
+        String[] uiBindFrom = {ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE};
+        int[] uiBindTo = {R.id.comic_series_list_item_title};
+        CursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.comic_series_list_item_layout, c,uiBindFrom, uiBindTo);
+        lv.setAdapter(adapter);
+        /*lv.setClickable(true);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(view.getContext(), DisplayMessageActivity.class);
+                Cursor c2 = (Cursor)lv.getItemAtPosition(i);
+                String message = c2.getString(c2.getColumnIndex(FeedReaderContract.FeedEntry.COLUMN_NAME_SUBTITLE));
+                intent.putExtra(EXTRA_MESSAGE, message);
+                startActivity(intent);
+            }
+        });*/
     }
 
 
@@ -29,6 +49,33 @@ public class ComicSeriesListingActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.comic_series_listing, menu);
         return true;
+    }
+
+
+    public Cursor RefreshListCursor(){
+        SQLiteDatabase db = mBackIssuesDatabase.getReadableDatabase();
+
+// Define a projection that specifies which columns from the database
+// you will actually use after this query.
+        String[] projection = {
+                ComicSeriesContract.ComicSeriesEntry._ID,
+                ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE
+        };
+
+// How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE + " ASC;";
+        Cursor c = db.query(
+                ComicSeriesContract.ComicSeriesEntry.TABLE_NAME,  // The table to query
+                projection,                               // The columns to return
+                null,                                // The columns for the WHERE clause
+                null,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                sortOrder                                 // The sort order
+        );
+
+        return c;
     }
 
     /** Called when the user clicks the Send button*/
@@ -47,6 +94,8 @@ public class ComicSeriesListingActivity extends Activity {
             String ex = e.toString();
         }
 
+        ListView lv = (ListView)findViewById(R.id.comic_series_list);
+        ((CursorAdapter)lv.getAdapter()).changeCursor(RefreshListCursor());
     }
     
 }

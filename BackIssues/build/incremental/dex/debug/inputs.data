@@ -1,19 +1,19 @@
 # incremental data. DO NOT EDIT.
 # format is <lastModified> <length> <SHA-1> <path>
 # Encoding is UTF-8
-1369178484000 527 43077d5604b65e6e030fe8d14405f3e4bc52745a /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/R$string.class
-1369178484000 2271 28bf4ecc9db8d18430f072f3ab99e5d0b4236df6 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/ComicSeriesListingActivity.class
-1369178484000 428 afd0ce375d378483716623efa6d251ec86cf8844 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/R$layout.class
+1369179174000 527 e06dacda31b7b596dbd38146356aebc6c67c811a /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/R$string.class
+1369179174000 3464 5e61062a803575c85814d8979df17a5fa594c60a /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/ComicSeriesListingActivity.class
+1369179174000 481 b1d1908da454a000f92e8fb8fac9d1c51437eb43 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/R$layout.class
 1369176754000 416 aaa6c397fa99714d53a2a0309fec1e9e8b722aed /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/R$drawable.class
 1369176754000 470 6f177a65f3529f2666170a46c4e36e675a480ae1 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/R$dimen.class
 1369176734000 484258 bd6479f5dd592790607e0504e66e0f31c2b4d308 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/libs/android-support-v4.jar
 1369178484000 1992 250179daa818b4f4f81ee5858496f8599ea0775e /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/BackIssuesDBHelper.class
-1369178484000 707 5dd8e48b15f002706b75372f95be5c950a120022 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/R.class
-1369178484000 496 c93114e167b677f833da6cdfaba944882d739bcd /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/R$id.class
-1369178484000 440 90f67a5b4d31ac6d4c5f0f0b9274c0cfd8ff4d9c /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/R$style.class
+1369179174000 707 01316bbccffb9b1cc2a41eea48ba3c6f3d4ba711 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/R.class
+1369179174000 589 f0e4e92b0dbc6a16fec72ab52ae9405220cc8dc1 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/R$id.class
+1369179174000 440 36f1d39733d19ff0290a5b0cbea5e774101c5f98 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/R$style.class
 1369176754000 349 eda8e0c70b81ad1847ffc22eea114eae89dee08d /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/R$attr.class
 1369177103000 629 0dc700eb0216128321732b05f8012116650f0116 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/ComicSeriesContract$ComicSeriesEntry.class
-1369178484000 413 af8df6df08e89efbb3411d54768ff35dccfe4d29 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/R$menu.class
+1369179174000 413 6ba2baa5497a14572a681184899ee3c204dae16c /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/R$menu.class
 1369176754000 351 999948e5f7db167b8f55fbbf84566009941d1d64 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/BuildConfig.class
 1369177103000 529 4bbb601a9d708256df16e28da923484b02c39a72 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/ComicSeriesContract.class
 1369177103000 736 11d961c1766f91eeba4a6ec21a79b9a46796e6c6 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/ComicSeriesContract$ComicIssueEntry.class
