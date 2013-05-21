@@ -10,6 +10,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:label="activity_comic_detail_listing" android:name="brian.ruth.backissues.ComicDetailListingActivity"/>
     </application>
 
 </manifest>

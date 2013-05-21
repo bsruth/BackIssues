@@ -12,6 +12,9 @@ import android.widget.*;
 
 public class ComicSeriesListingActivity extends Activity {
 
+    //activity messages
+    public final static String SELECTED_COMIC_SERIES_ID = "brian.ruth.backissues.SELECTED_COMIC_SERIES_ID";
+
     //members
     private BackIssuesDBHelper mBackIssuesDatabase; //database used for entire app
 
@@ -30,17 +33,17 @@ public class ComicSeriesListingActivity extends Activity {
         int[] uiBindTo = {R.id.comic_series_list_item_title};
         CursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.comic_series_list_item_layout, c,uiBindFrom, uiBindTo);
         lv.setAdapter(adapter);
-        /*lv.setClickable(true);
+        lv.setClickable(true);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(view.getContext(), DisplayMessageActivity.class);
+                Intent intent = new Intent(view.getContext(), ComicDetailListingActivity.class);
                 Cursor c2 = (Cursor)lv.getItemAtPosition(i);
-                String message = c2.getString(c2.getColumnIndex(FeedReaderContract.FeedEntry.COLUMN_NAME_SUBTITLE));
-                intent.putExtra(EXTRA_MESSAGE, message);
+                String message = c2.getString(c2.getColumnIndex(ComicSeriesContract.ComicSeriesEntry._ID));
+                intent.putExtra(SELECTED_COMIC_SERIES_ID, message);
                 startActivity(intent);
             }
-        });*/
+        });
     }
 
 
