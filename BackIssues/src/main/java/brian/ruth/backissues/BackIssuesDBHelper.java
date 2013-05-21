@@ -3,7 +3,6 @@ package brian.ruth.backissues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import brian.ruth.backissues.ComicSeriesContract;
 
 /**
  * Created by brian on 5/19/13.

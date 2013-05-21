@@ -70,22 +70,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="BackIssuesDBHelper.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="BackIssuesDBHelper.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/BackIssuesDBHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="36" selection-start="507" selection-end="507" vertical-scroll-proportion="0.0">
+            <state line="14" column="49" selection-start="470" selection-end="470" vertical-scroll-proportion="0.22082019">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ComicSeriesContract.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesContract.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="0" selection-start="893" selection-end="893" vertical-scroll-proportion="0.44164038">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -100,8 +91,8 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/BackIssuesDBHelper.java" />
         <option value="$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesContract.java" />
+        <option value="$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/BackIssuesDBHelper.java" />
       </list>
     </option>
   </component>
@@ -368,12 +359,12 @@
       <changelist id="00f9fac7-76a7-4e75-80ad-e31b55ea6761" name="Default" comment="" />
       <created>1369176734420</created>
       <updated>1369176734420</updated>
-      <workItem from="1369176745442" duration="376000" />
+      <workItem from="1369176745442" duration="499000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="376000" />
+    <option name="totallyTimeSpent" value="499000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-2496" y="-4" width="2497" height="1605" extended-state="6" />
@@ -463,19 +454,19 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/BackIssuesDBHelper.java">
+    <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesContract.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="36" selection-start="507" selection-end="507" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="26" column="31" selection-start="885" selection-end="885" vertical-scroll-proportion="0.41009465">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesContract.java">
+    <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/BackIssuesDBHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="0" selection-start="893" selection-end="893" vertical-scroll-proportion="0.44164038">
-          <folding />
+        <state line="14" column="49" selection-start="470" selection-end="470" vertical-scroll-proportion="0.22082019">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
