@@ -6,6 +6,6 @@
     <string name="action_settings" >Settings
     </string>
     <string name="hello_world" >Hello world!
-    </string>
+    </string><string name="comic_series_text_hint">Enter Comic Series</string>
 
 </resources>

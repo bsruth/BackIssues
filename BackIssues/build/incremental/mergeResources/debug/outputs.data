@@ -2,12 +2,12 @@
 # format is <lastModified> <length> <SHA-1> <path>
 # Encoding is UTF-8
 1369176753000 244 045ff451db7cd8e61285502b8c9bbf7405f2078d /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/menu/comic_series_listing.xml
-1369176753000 788 3abe98e10ff72bbb5475dee7e601e8d52d890844 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/values/values.xml
+1369178484000 858 6ad33f6a553f306a195ade3c06d71e0f43dcd786 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/values/values.xml
 1369176753000 203 19aedb7cdc3386344e36087b035a0a6b2b91d4cd /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/values-v11/values.xml
 1369176753000 24654 696bbbc63d2250ef7d3373f2d602e604acd13d8c /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/drawable-xxhdpi/ic_launcher.png
 1369176753000 217 f02e000d05a079992d2dba18039216c1e6b8784f /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/values-v14/values.xml
 1369176753000 3769 eec07752d40e268ed7f4a1730acc77ab1e40aeb0 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/drawable-mdpi/ic_launcher.png
-1369176753000 663 6521684d3ff332e534385c579a7c305231c67db9 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/layout/activity_comic_series_listing.xml
+1369178484000 874 e319a91e0b53b8d327567f60abb7f9a05d37f07c /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/layout/activity_comic_series_listing.xml
 1369176753000 125 fae9d1b71d520745438010c9ca7cde9c81dfefac /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/values-sw720dp-land/values.xml
 1369176753000 7721 39b0f5a0570da92f471225402ad0ea6de30bf2be /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/drawable-hdpi/ic_launcher.png
 1369176753000 12329 a8301606e15d4b6dccdd775cc273cfc51a552645 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/drawable-xhdpi/ic_launcher.png
