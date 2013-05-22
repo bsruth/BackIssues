@@ -118,6 +118,11 @@
                 path="/home/brian/AndroidStudioProjects/BackIssues/BackIssues/src/main/res/layout/activity_comic_detail_listing.xml"
                 qualifiers=""
                 type="layout" />
+            <file
+                name="comic_issue_list_item_layout"
+                path="/home/brian/AndroidStudioProjects/BackIssues/BackIssues/src/main/res/layout/comic_issue_list_item_layout.xml"
+                qualifiers=""
+                type="layout" />
         </source>
         <source path="/home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/rs/debug" />
     </dataSet>

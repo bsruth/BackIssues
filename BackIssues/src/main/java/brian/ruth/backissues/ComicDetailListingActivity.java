@@ -5,9 +5,12 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+import android.text.SpannableString;
+import android.text.style.StrikethroughSpan;
 
 /**
  * Created by brian on 5/21/13.
@@ -33,9 +36,25 @@ public class ComicDetailListingActivity extends Activity {
 
         final ListView lv = (ListView)findViewById(R.id.comic_issue_list);
 
-        String[] uiBindFrom = {ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER};
-        int[] uiBindTo = {R.id.comic_series_list_item_title};
-        CursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.comic_series_list_item_layout, c,uiBindFrom, uiBindTo);
+        String[] uiBindFrom = {ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER, ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_CHECKED_OFF};
+        int[] uiBindTo = {R.id.comic_issue_list_item_title, R.id.comic_issue_list_item_title};
+        CursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.comic_issue_list_item_layout, c,uiBindFrom, uiBindTo);
+        ((SimpleCursorAdapter)adapter).setViewBinder(new SimpleCursorAdapter.ViewBinder() {
+            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+                if (columnIndex == cursor.getColumnIndex(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_CHECKED_OFF)) {
+                    //if the comic is checked off, we will cross it out and make it a lighter color.
+                    if (cursor.getInt(columnIndex) > 0) {
+                        TextView tv = (TextView) view;
+                        SpannableString content = new SpannableString(cursor.getString(cursor.getColumnIndex(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER)));
+                        content.setSpan(new StrikethroughSpan(), 0, content.length(), 0);
+                        tv.setTextColor(Color.parseColor("#FFCCCCCC"));
+                        tv.setText(content);
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
         lv.setAdapter(adapter);
     }
 
