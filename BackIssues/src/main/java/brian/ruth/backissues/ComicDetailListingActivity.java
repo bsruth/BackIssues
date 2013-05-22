@@ -49,6 +49,10 @@ public class ComicDetailListingActivity extends Activity {
                         content.setSpan(new StrikethroughSpan(), 0, content.length(), 0);
                         tv.setTextColor(Color.parseColor("#FFCCCCCC"));
                         tv.setText(content);
+                    } else {
+                        TextView tv = (TextView) view;
+                        tv.setTextColor(Color.BLACK);
+                        tv.setText(cursor.getString(cursor.getColumnIndex(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER)));
                     }
                     return true;
                 }
@@ -56,6 +60,34 @@ public class ComicDetailListingActivity extends Activity {
             }
         });
         lv.setAdapter(adapter);
+
+        lv.setLongClickable(true);
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Cursor c2 = (Cursor)lv.getItemAtPosition(i);
+                int checked = c2.getInt(c2.getColumnIndex(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_CHECKED_OFF));
+
+                try {
+                    //todo: see if series already in database before adding again
+                    SQLiteDatabase db = mBackIssuesDatabase.getWritableDatabase();
+                    ContentValues values = new ContentValues();
+                    int checkedUpdateState = (checked == BackIssuesDBHelper.SQL_FALSE) ? BackIssuesDBHelper.SQL_TRUE : BackIssuesDBHelper.SQL_FALSE;
+                    values.put(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_CHECKED_OFF, checkedUpdateState);
+
+                    int rowID = c2.getInt(c2.getColumnIndex(ComicSeriesContract.ComicIssueEntry._ID));
+                    String rowSelect = ComicSeriesContract.ComicIssueEntry._ID + "=" + rowID;
+                    db.update(ComicSeriesContract.ComicIssueEntry.TABLE_NAME, values, rowSelect, null);
+
+
+                    ((CursorAdapter)lv.getAdapter()).changeCursor(RefreshListCursor());
+                }catch (Exception e) {
+                    //todo: do something meaningful
+                    String ex = e.toString();
+                }
+                return true;
+            }
+        });
     }
 
     public Cursor RefreshListCursor(){
