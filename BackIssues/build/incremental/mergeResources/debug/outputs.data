@@ -2,13 +2,13 @@
 # format is <lastModified> <length> <SHA-1> <path>
 # Encoding is UTF-8
 1369176753000 244 045ff451db7cd8e61285502b8c9bbf7405f2078d /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/menu/comic_series_listing.xml
-1369178484000 858 6ad33f6a553f306a195ade3c06d71e0f43dcd786 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/values/values.xml
+1369181485000 928 72ef1d8058b813d56ce0f9d05bb7d1f368b8992e /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/values/values.xml
 1369176753000 203 19aedb7cdc3386344e36087b035a0a6b2b91d4cd /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/values-v11/values.xml
 1369176753000 24654 696bbbc63d2250ef7d3373f2d602e604acd13d8c /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/drawable-xxhdpi/ic_launcher.png
 1369176753000 217 f02e000d05a079992d2dba18039216c1e6b8784f /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/values-v14/values.xml
 1369179174000 499 b3b1313fe15cce088b1bed5803ad3d25876f891a /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/layout/comic_series_list_item_layout.xml
 1369176753000 3769 eec07752d40e268ed7f4a1730acc77ab1e40aeb0 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/drawable-mdpi/ic_launcher.png
-1369180213000 464 54b90b603e4c808f26d0697a34a3642115359d25 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/layout/activity_comic_detail_listing.xml
+1369181485000 1113 5a28ff1b22f6611b815b72b7ae739ac126f9199b /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/layout/activity_comic_detail_listing.xml
 1369179545000 1054 0f00d24eb5dd5e72bcb99b20f16a0a2d784fa15e /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/layout/activity_comic_series_listing.xml
 1369176753000 125 fae9d1b71d520745438010c9ca7cde9c81dfefac /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/values-sw720dp-land/values.xml
 1369176753000 7721 39b0f5a0570da92f471225402ad0ea6de30bf2be /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/res/all/debug/drawable-hdpi/ic_launcher.png

@@ -7,5 +7,6 @@
     </string>
     <string name="hello_world" >Hello world!
     </string><string name="comic_series_text_hint">Enter Comic Series</string>
+    <string name="comic_issues_text_hint">Enter Issue Number</string>
 
 </resources>

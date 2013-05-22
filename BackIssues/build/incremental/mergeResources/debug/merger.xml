@@ -36,6 +36,8 @@
             <file
                 path="/home/brian/AndroidStudioProjects/BackIssues/BackIssues/src/main/res/values/strings.xml"
                 qualifiers="" >
+                <string name="comic_issues_text_hint" >Enter Issue Number
+                </string>
                 <string name="action_settings" >Settings
                 </string>
                 <string name="comic_series_text_hint" >Enter Comic Series
