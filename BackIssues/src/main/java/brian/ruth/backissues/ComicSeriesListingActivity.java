@@ -98,17 +98,48 @@ public class ComicSeriesListingActivity extends Activity {
         try {
             //todo: see if series already in database before adding again
             SQLiteDatabase db = mBackIssuesDatabase.getWritableDatabase();
-            ContentValues values = new ContentValues();
-            values.put(ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE, seriesTitle);
+            if(isDuplicateOrEmptyTitle(seriesTitle, db) == false) {
+                ContentValues values = new ContentValues();
+                values.put(ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE, seriesTitle);
 
-            long newRowID = db.insert(ComicSeriesContract.ComicSeriesEntry.TABLE_NAME, "null", values);
+                long newRowID = db.insert(ComicSeriesContract.ComicSeriesEntry.TABLE_NAME, "null", values);
+            }
         }catch (Exception e) {
             //todo: do something meaningful
             String ex = e.toString();
         }
 
+        editText.setText("");
         ListView lv = (ListView)findViewById(R.id.comic_series_list);
         ((CursorAdapter)lv.getAdapter()).changeCursor(RefreshListCursor());
+        lv.requestFocus();
+    }
+
+    private boolean isDuplicateOrEmptyTitle(String title, SQLiteDatabase db)
+    {
+        //check empty or all whitespace
+        //todo: ensure it looks like a valid title e.g. ".@@@7f" is probably invalid
+        if(title.trim().length() == 0 ){
+            return true;
+        }
+
+        String[] projection = { ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE };
+        String rowSelectionQuery = " UPPER(" + ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE + ") = UPPER('" + title + "')";
+        Cursor c =  db.query(
+                ComicSeriesContract.ComicSeriesEntry.TABLE_NAME,  // The table to query
+                projection,                               // The columns to return
+                rowSelectionQuery,                                // The columns for the WHERE clause
+                null,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                null                                 // The sort order
+        );
+
+        if(c.getCount() == 0) {
+            return false; //nothing matches this item
+        } else {
+            return true;
+        }
     }
     
 }

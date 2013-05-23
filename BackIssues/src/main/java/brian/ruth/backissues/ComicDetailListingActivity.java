@@ -139,19 +139,50 @@ public class ComicDetailListingActivity extends Activity {
         try {
             //todo: see if series already in database before adding again
             SQLiteDatabase db = mBackIssuesDatabase.getWritableDatabase();
-            ContentValues values = new ContentValues();
-            values.put(ComicSeriesContract.ComicIssueEntry.COLUMN_SERIES_ID, mSeriesID);
-            values.put(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER, issueNumber);
-            values.put(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_CHECKED_OFF, BackIssuesDBHelper.SQL_FALSE);
+            if(isDuplicateOrEmptyIssue(issueNumber, db) == false){
+                ContentValues values = new ContentValues();
+                values.put(ComicSeriesContract.ComicIssueEntry.COLUMN_SERIES_ID, mSeriesID);
+                values.put(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER, issueNumber);
+                values.put(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_CHECKED_OFF, BackIssuesDBHelper.SQL_FALSE);
 
 
-            long newRowID = db.insert(ComicSeriesContract.ComicIssueEntry.TABLE_NAME, "null", values);
+                long newRowID = db.insert(ComicSeriesContract.ComicIssueEntry.TABLE_NAME, "null", values);
+            }
         }catch (Exception e) {
             //todo: do something meaningful
             String ex = e.toString();
         }
 
+        editText.setText("");
         ListView lv = (ListView)findViewById(R.id.comic_issue_list);
         ((CursorAdapter)lv.getAdapter()).changeCursor(RefreshListCursor());
+        lv.requestFocus();
+    }
+
+    private boolean isDuplicateOrEmptyIssue(String issue, SQLiteDatabase db)
+    {
+        //check empty or all whitespace
+        //todo: ensure it looks like a valid issue e.g. ".@@@7f" is probably invalid
+        if(issue.trim().length() == 0 ){
+            return true;
+        }
+
+        String[] projection = { ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER};
+        String rowSelectionQuery = " UPPER(" + ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER + ") = UPPER('" + issue + "')";
+        Cursor c =  db.query(
+                ComicSeriesContract.ComicIssueEntry.TABLE_NAME,  // The table to query
+                projection,                               // The columns to return
+                rowSelectionQuery,                                // The columns for the WHERE clause
+                null,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                null                                 // The sort order
+        );
+
+        if(c.getCount() == 0) {
+            return false; //nothing matches this item
+        } else {
+            return true;
+        }
     }
 }

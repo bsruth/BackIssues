@@ -2,7 +2,7 @@
 # format is <lastModified> <length> <SHA-1> <path>
 # Encoding is UTF-8
 1369265453000 573 ef91330bbfe43b3f246535b388299be5c2b732cc /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/R$string.class
-1369333179000 4158 65f3413d0894fd2bdf19bea2155bb30de4384360 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/ComicSeriesListingActivity.class
+1369334993000 4817 8efe0c3d9be2608cf3e86a592ad0f7c9cd184921 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/ComicSeriesListingActivity.class
 1369265453000 586 479506a6311a1978e75545b963582bf845785de2 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/R$layout.class
 1369176754000 416 aaa6c397fa99714d53a2a0309fec1e9e8b722aed /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/R$drawable.class
 1369176754000 470 6f177a65f3529f2666170a46c4e36e675a480ae1 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/R$dimen.class
@@ -19,5 +19,5 @@
 1369176754000 351 999948e5f7db167b8f55fbbf84566009941d1d64 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/BuildConfig.class
 1369177103000 529 4bbb601a9d708256df16e28da923484b02c39a72 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/ComicSeriesContract.class
 1369177103000 736 11d961c1766f91eeba4a6ec21a79b9a46796e6c6 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/ComicSeriesContract$ComicIssueEntry.class
-1369333179000 5089 8bfcb39209aadf8e4e2557ebd480604fe1a9b256 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/ComicDetailListingActivity.class
+1369335213000 5612 c7286836716ab76751d9b4140979c44b87cb724d /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/ComicDetailListingActivity.class
 1369332956000 1838 57bfb42a3949ea74c90a147da8bd166047faac26 /home/brian/AndroidStudioProjects/BackIssues/BackIssues/build/classes/debug/brian/ruth/backissues/ComicDetailListingActivity$1.class
