@@ -108,8 +108,11 @@ public class ComicDetailListingActivity extends Activity {
         };
 
 // How you want the results sorted in the resulting Cursor
-        String sortOrder =
-                ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER + " ASC;";
+        //casting to numbers so that 99 comes before 834 without requiring 0 padding.
+        String sortOrder = " cast(" + ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER + " as unsigned) ASC;";
+
+        //String sortOrder =
+        //        ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER + " ASC;";
         String rowSelection = ComicSeriesContract.ComicIssueEntry.COLUMN_SERIES_ID + "=" + mSeriesID;
 
         try {
