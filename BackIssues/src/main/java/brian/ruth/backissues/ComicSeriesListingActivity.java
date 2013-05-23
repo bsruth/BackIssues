@@ -14,6 +14,7 @@ public class ComicSeriesListingActivity extends Activity {
 
     //activity messages
     public final static String SELECTED_COMIC_SERIES_ID = "brian.ruth.backissues.SELECTED_COMIC_SERIES_ID";
+    public final static String SELECTED_COMIC_SERIES_TITLE = "brian.ruth.backissues.SELECTED_COMIC_SERIES_TITLE";
 
     //members
     private BackIssuesDBHelper mBackIssuesDatabase; //database used for entire app
@@ -39,8 +40,12 @@ public class ComicSeriesListingActivity extends Activity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(view.getContext(), ComicDetailListingActivity.class);
                 Cursor c2 = (Cursor)lv.getItemAtPosition(i);
-                String message = c2.getString(c2.getColumnIndex(ComicSeriesContract.ComicSeriesEntry._ID));
-                intent.putExtra(SELECTED_COMIC_SERIES_ID, message);
+                String seriesID = c2.getString(c2.getColumnIndex(ComicSeriesContract.ComicSeriesEntry._ID));
+                intent.putExtra(SELECTED_COMIC_SERIES_ID, seriesID);
+
+                String seriesTitle = c2.getString(c2.getColumnIndex(ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE));
+                intent.putExtra(SELECTED_COMIC_SERIES_TITLE, seriesTitle);
+
                 startActivity(intent);
             }
         });

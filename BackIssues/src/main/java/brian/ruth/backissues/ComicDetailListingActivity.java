@@ -27,8 +27,10 @@ public class ComicDetailListingActivity extends Activity {
         //get intent
         Intent intent = getIntent();
         mSeriesID = intent.getStringExtra(ComicSeriesListingActivity.SELECTED_COMIC_SERIES_ID);
+        String seriesTitle = intent.getStringExtra(ComicSeriesListingActivity.SELECTED_COMIC_SERIES_TITLE);
 
         setContentView(R.layout.activity_comic_detail_listing);
+        setTitle(seriesTitle);
 
         mBackIssuesDatabase = new BackIssuesDBHelper(this);
 
