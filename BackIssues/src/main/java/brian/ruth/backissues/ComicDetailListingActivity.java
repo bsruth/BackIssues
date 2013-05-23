@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.*;
 import android.text.SpannableString;
 import android.text.style.StrikethroughSpan;
+import android.view.KeyEvent;
+import android.view.View.OnKeyListener;
 
 /**
  * Created by brian on 5/21/13.
@@ -31,6 +33,27 @@ public class ComicDetailListingActivity extends Activity {
 
         setContentView(R.layout.activity_comic_detail_listing);
         setTitle(seriesTitle);
+
+        EditText textEntry = (EditText) findViewById(R.id.comic_issues_text_entry);
+        textEntry.setOnKeyListener(new OnKeyListener()
+        {
+            public boolean onKey(View v, int keyCode, KeyEvent event)
+            {
+                if (event.getAction() == KeyEvent.ACTION_DOWN)
+                {
+                    switch (keyCode)
+                    {
+                        case KeyEvent.KEYCODE_DPAD_CENTER:
+                        case KeyEvent.KEYCODE_ENTER:
+                            addComicIssue(v);
+                            return true;
+                        default:
+                            break;
+                    }
+                }
+                return false;
+            }
+        });
 
         mBackIssuesDatabase = new BackIssuesDBHelper(this);
 
