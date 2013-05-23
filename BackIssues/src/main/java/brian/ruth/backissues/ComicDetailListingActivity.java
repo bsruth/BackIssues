@@ -90,8 +90,10 @@ public class ComicDetailListingActivity extends Activity {
                 return true;
             }
         });
-    }
 
+        //set focus to listview must be done last or we don't get focus
+        lv.requestFocus();
+    }
     public Cursor RefreshListCursor(){
 
         SQLiteDatabase db = mBackIssuesDatabase.getReadableDatabase();

@@ -30,6 +30,8 @@ public class ComicSeriesListingActivity extends Activity {
 
         final ListView lv = (ListView)findViewById(R.id.comic_series_list);
 
+
+
         String[] uiBindFrom = {ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE};
         int[] uiBindTo = {R.id.comic_series_list_item_title};
         CursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.comic_series_list_item_layout, c,uiBindFrom, uiBindTo);
@@ -49,6 +51,9 @@ public class ComicSeriesListingActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        //set focus to listview must be done last or we don't get focus
+        lv.requestFocus();
     }
 
 
