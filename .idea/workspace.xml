@@ -24,7 +24,7 @@
     <file path="$PROJECT_DIR$/BackIssues/build/source/r/debug/brian/ruth/backissues/R.java" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1369333384428" ignored="false" />
     <file path="/comic_series_list_item_layout.xml" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1369267310273" ignored="false" />
     <file path="/Dummy.txt" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1369263971951" ignored="false" />
-    <file path="/ComicDetailListingActivity.java" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1369699532286" ignored="false" />
+    <file path="/ComicDetailListingActivity.java" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1369782223888" ignored="false" />
     <file path="/activity_comic_detail_listing.xml" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1369332941699" ignored="false" />
     <file path="/strings.xml" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1369180992766" ignored="false" />
     <file path="/comic_issue_list_item_layout.xml" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1369333367353" ignored="false" />
@@ -95,13 +95,13 @@
         <leaf>
           <file leaf-file-name="activity_comic_series_listing.xml" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/BackIssues/src/main/res/layout/activity_comic_series_listing.xml">
+              <provider editor-type-id="android-designer">
+                <state />
+              </provider>
               <provider selected="true" editor-type-id="text-editor">
                 <state line="22" column="75" selection-start="1037" selection-end="1037" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
-              </provider>
-              <provider editor-type-id="android-designer">
-                <state />
               </provider>
             </entry>
           </file>
@@ -116,36 +116,34 @@
           </file>
           <file leaf-file-name="activity_comic_detail_listing.xml" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/BackIssues/src/main/res/layout/activity_comic_detail_listing.xml">
+              <provider editor-type-id="android-designer">
+                <state />
+              </provider>
               <provider selected="true" editor-type-id="text-editor">
                 <state line="20" column="58" selection-start="899" selection-end="899" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
-              </provider>
-              <provider editor-type-id="android-designer">
-                <state />
               </provider>
             </entry>
           </file>
           <file leaf-file-name="ComicSeriesListingActivity.java" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesListingActivity.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="49" column="0" selection-start="1731" selection-end="1731" vertical-scroll-proportion="0.21176471">
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
+                <state line="92" column="69" selection-start="3518" selection-end="3518" vertical-scroll-proportion="0.64600843">
+                  <folding />
                 </state>
               </provider>
             </entry>
           </file>
           <file leaf-file-name="comic_series_list_item_layout.xml" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/BackIssues/src/main/res/layout/comic_series_list_item_layout.xml">
+              <provider editor-type-id="android-designer">
+                <state />
+              </provider>
               <provider selected="true" editor-type-id="text-editor">
                 <state line="14" column="15" selection-start="540" selection-end="540" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
-              </provider>
-              <provider editor-type-id="android-designer">
-                <state />
               </provider>
             </entry>
           </file>
@@ -156,7 +154,7 @@
           <file leaf-file-name="ComicDetailListingActivity.java" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicDetailListingActivity.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="195" column="71" selection-start="8863" selection-end="8863" vertical-scroll-proportion="0.56989247">
+                <state line="62" column="33" selection-start="2169" selection-end="2169" vertical-scroll-proportion="0.57507986">
                   <folding />
                 </state>
               </provider>
@@ -173,13 +171,13 @@
           </file>
           <file leaf-file-name="comic_issue_list_item_layout.xml" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/BackIssues/src/main/res/layout/comic_issue_list_item_layout.xml">
+              <provider editor-type-id="android-designer">
+                <state />
+              </provider>
               <provider selected="true" editor-type-id="text-editor">
                 <state line="5" column="49" selection-start="258" selection-end="258" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
-              </provider>
-              <provider editor-type-id="android-designer">
-                <state />
               </provider>
             </entry>
           </file>
@@ -421,6 +419,7 @@
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="AVD_for_4_7in_WXGA" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="recentsLimit" value="5" />
+    <property name="FullScreen" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="emulator-5554" />
@@ -577,12 +576,14 @@
       <workItem from="1369176745442" duration="937000" />
       <workItem from="1369178011045" duration="4835000" />
       <workItem from="1369263324678" duration="11360000" />
-      <workItem from="1369698467923" duration="1125000" />
+      <workItem from="1369698467923" duration="1176000" />
+      <workItem from="1369781537204" duration="73000" />
+      <workItem from="1369781673490" duration="674000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18257000" />
+    <option name="totallyTimeSpent" value="19055000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -609,8 +610,9 @@
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993057" sideWeight="0.67055595" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39876458" sideWeight="0.49979582" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39876458" sideWeight="0.49979582" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39945093" sideWeight="0.50020415" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
@@ -622,11 +624,10 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17490806" sideWeight="0.6712423" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32875773" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32875773" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993057" sideWeight="0.6712423" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993057" sideWeight="0.6712423" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993057" sideWeight="0.67055595" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -703,13 +704,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BackIssues/src/main/res/layout/activity_comic_detail_listing.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="0" selection-start="1113" selection-end="1113" vertical-scroll-proportion="0.0">
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BackIssues/src/main/res/values/strings.xml">
@@ -720,37 +721,33 @@
     <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesListingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="93" column="67" selection-start="3986" selection-end="3987" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BackIssues/src/main/res/layout/comic_series_list_item_layout.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="15" selection-start="499" selection-end="499" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BackIssues/src/main/res/layout/activity_comic_series_listing.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BackIssues/src/main/res/layout/activity_comic_series_listing.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="42" selection-start="374" selection-end="374" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesContract.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="48" selection-start="360" selection-end="377" vertical-scroll-proportion="0.13626835">
-          <folding />
-        </state>
+        <state line="13" column="48" selection-start="360" selection-end="377" vertical-scroll-proportion="0.13626835" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BackIssues/src/main/res/values/strings.xml">
@@ -766,43 +763,43 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BackIssues/src/main/res/layout/activity_comic_detail_listing.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="58" selection-start="899" selection-end="899" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BackIssues/src/main/res/layout/comic_issue_list_item_layout.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BackIssues/src/main/res/layout/comic_issue_list_item_layout.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="49" selection-start="258" selection-end="258" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BackIssues/src/main/res/layout/comic_series_list_item_layout.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BackIssues/src/main/res/layout/comic_series_list_item_layout.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="15" selection-start="540" selection-end="540" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BackIssues/src/main/res/layout/activity_comic_series_listing.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BackIssues/src/main/res/layout/activity_comic_series_listing.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="75" selection-start="1037" selection-end="1037" vertical-scroll-proportion="0.0">
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-17/android.jar!/android/app/Instrumentation.class">
@@ -814,16 +811,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesListingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="0" selection-start="1731" selection-end="1731" vertical-scroll-proportion="0.21176471">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="92" column="69" selection-start="3518" selection-end="3518" vertical-scroll-proportion="0.64600843">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicDetailListingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="195" column="71" selection-start="8863" selection-end="8863" vertical-scroll-proportion="0.56989247">
+        <state line="62" column="33" selection-start="2169" selection-end="2169" vertical-scroll-proportion="0.57507986">
           <folding />
         </state>
       </provider>

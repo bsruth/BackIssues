@@ -57,6 +57,12 @@ public class ComicDetailListingActivity extends Activity {
 
         mBackIssuesDatabase = new BackIssuesDBHelper(this);
 
+        //we want to remove all crossed off items on create so that
+        //if we accidentally cross off an item, it is still shown until
+        //this activity is recreated, giving the user a chance to re-add
+        //it to the missing list.
+        RemoveCrossedOffItems();
+
         Cursor c = RefreshListCursor();
 
         final ListView lv = (ListView)findViewById(R.id.comic_issue_list);
@@ -116,6 +122,22 @@ public class ComicDetailListingActivity extends Activity {
 
         //set focus to listview must be done last or we don't get focus
         lv.requestFocus();
+    }
+
+    //removes crossed off items from the database. no sense keeping them
+    //around if they are no longer missing
+    public void RemoveCrossedOffItems() {
+
+        SQLiteDatabase db = mBackIssuesDatabase.getWritableDatabase();
+        String delete_criteria = ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_CHECKED_OFF + "=" + BackIssuesDBHelper.SQL_TRUE + ";";
+
+        db.delete( ComicSeriesContract.ComicIssueEntry.TABLE_NAME,
+                delete_criteria,
+                null
+                );
+
+        db.close();
+
     }
     public Cursor RefreshListCursor(){
 
