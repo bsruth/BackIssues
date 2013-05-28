@@ -194,7 +194,8 @@ public class ComicDetailListingActivity extends Activity {
         }
 
         String[] projection = { ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER};
-        String rowSelectionQuery = " UPPER(" + ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER + ") = UPPER('" + issue + "')";
+        String rowSelectionQuery = " UPPER(" + ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER + ") = UPPER('" + issue + "') " +
+                "AND " + ComicSeriesContract.ComicIssueEntry.COLUMN_SERIES_ID + "=" + mSeriesID;
         Cursor c =  db.query(
                 ComicSeriesContract.ComicIssueEntry.TABLE_NAME,  // The table to query
                 projection,                               // The columns to return
