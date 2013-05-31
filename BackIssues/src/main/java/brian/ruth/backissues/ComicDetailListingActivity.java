@@ -7,12 +7,23 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.*;
 import android.text.SpannableString;
 import android.text.style.StrikethroughSpan;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.View.OnKeyListener;
+import android.widget.AdapterView;
+import android.widget.CursorAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by brian on 5/21/13.
@@ -22,9 +33,13 @@ public class ComicDetailListingActivity extends Activity {
     //members
     private BackIssuesDBHelper mBackIssuesDatabase;
     private String mSeriesID;
+    //todo: should be an enum
+    private int mVisibilityState;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mVisibilityState = 0;
 
         //get intent
         Intent intent = getIntent();
@@ -122,6 +137,71 @@ public class ComicDetailListingActivity extends Activity {
 
         //set focus to listview must be done last or we don't get focus
         lv.requestFocus();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.comic_detail_listing_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.checked_off_visibility:
+                mVisibilityState = (mVisibilityState == 0) ? 1 : 0;
+                if(mVisibilityState == 0) {
+                 //todo: show all missing issues.
+                }else {
+                    getAllOwnedIssues();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    //generate a list of all items that are not in the database
+    //for this series or are crossed off. This is the list of items
+    //that are owned for this series.
+    private List<String> getAllOwnedIssues() {
+        SQLiteDatabase db = mBackIssuesDatabase.getWritableDatabase();
+
+        List<String> ownedIssueList = new ArrayList<String>();
+
+        //first get all issues in the DB for this series
+        Cursor c = RefreshListCursor();
+
+        //now iterate over the cursor list, adding skipped items until
+        //all rows in the db have been processed
+        //todo: we should find out how many issues are in this series and loop until that is hit
+
+        //todo: this only works with numeric only issues
+        int issueNumberToAdd = 0;
+        while(c.moveToNext() ) {
+
+            int issueNumber = c.getInt(c.getColumnIndex(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER));
+            int checkedOff = c.getInt(c.getColumnIndex(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_CHECKED_OFF));
+            while ( issueNumberToAdd  < issueNumber) {
+                ownedIssueList.add(String.valueOf(issueNumberToAdd));
+                ++issueNumberToAdd;
+            }
+
+            if(checkedOff == BackIssuesDBHelper.SQL_TRUE) {
+                //add it to the list because it has been checked off
+                //but not yet removed from the DB.
+                ownedIssueList.add(String.valueOf(issueNumber));
+            } else {
+                //skip it since it is missing
+                issueNumberToAdd = issueNumber + 1;
+            }
+        }
+
+        db.close();
+
+        return ownedIssueList;
     }
 
     //removes crossed off items from the database. no sense keeping them
