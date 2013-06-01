@@ -56,7 +56,8 @@ public class ComicSeriesListingActivity extends Activity {
 
         String[] uiBindFrom = {ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE};
         int[] uiBindTo = {R.id.comic_series_list_item_title};
-        CursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.comic_series_list_item_layout, c,uiBindFrom, uiBindTo);
+        ComicSeriesCursorAdapter adapter = new ComicSeriesCursorAdapter(this, c, true);
+        adapter.db = mBackIssuesDatabase.getReadableDatabase();
         lv.setAdapter(adapter);
         lv.setClickable(true);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
