@@ -79,6 +79,17 @@ public class ComicSeriesListingActivity extends Activity {
         lv.requestFocus();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //refresh the list in case an item was added or removed from
+        //a series
+        //todo: only update when a change is made, or only update the changed item, not the whole list
+        final ListView lv = (ListView)findViewById(R.id.comic_series_list);
+        ((BaseAdapter)(lv.getAdapter())).notifyDataSetChanged();
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
