@@ -45,10 +45,12 @@ public class ComicSeriesCursorAdapter extends CursorAdapter{
         if(db != null) {
             String[] projection = {
                     ComicSeriesContract.ComicIssueEntry.COLUMN_SERIES_ID,
+                    ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_CHECKED_OFF
             };
 
             int seriesID = cursor.getInt(cursor.getColumnIndex(ComicSeriesContract.ComicSeriesEntry._ID));
-            String rowSelection = ComicSeriesContract.ComicIssueEntry.COLUMN_SERIES_ID + "=" + seriesID;
+            String rowSelection = ComicSeriesContract.ComicIssueEntry.COLUMN_SERIES_ID + "=" + seriesID + " AND " +
+                    ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_CHECKED_OFF + "=" + BackIssuesDBHelper.SQL_FALSE;
 
             try {
                 Cursor c = db.query(
