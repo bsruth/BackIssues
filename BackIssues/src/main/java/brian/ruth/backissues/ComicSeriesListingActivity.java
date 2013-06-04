@@ -8,7 +8,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.KeyEvent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,32 +26,14 @@ public class ComicSeriesListingActivity extends Activity {
 
     //members
     private BackIssuesDBHelper mBackIssuesDatabase; //database used for entire app
-
+    private ComicSeriesCursorAdapter adapter = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comic_series_listing);
 
         EditText textEntry = (EditText) findViewById(R.id.comic_series_text_entry);
-        textEntry.setOnKeyListener(new View.OnKeyListener()
-        {
-            public boolean onKey(View v, int keyCode, KeyEvent event)
-            {
-                if (event.getAction() == KeyEvent.ACTION_DOWN)
-                {
-                    switch (keyCode)
-                    {
-                        case KeyEvent.KEYCODE_DPAD_CENTER:
-                        case KeyEvent.KEYCODE_ENTER:
-                            addComicSeries(v);
-                            return true;
-                        default:
-                            break;
-                    }
-                }
-                return false;
-            }
-        });
+        textEntry.addTextChangedListener(filterTextWatcher);
 
         mBackIssuesDatabase = new BackIssuesDBHelper(this);
 
@@ -62,8 +45,9 @@ public class ComicSeriesListingActivity extends Activity {
 
         String[] uiBindFrom = {ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE};
         int[] uiBindTo = {R.id.comic_series_list_item_title};
-        ComicSeriesCursorAdapter adapter = new ComicSeriesCursorAdapter(this, c, true);
+        adapter = new ComicSeriesCursorAdapter(this, c, true);
         adapter.db = mBackIssuesDatabase.getReadableDatabase();
+
         lv.setAdapter(adapter);
 
         //single click to see the issues for a series
@@ -125,6 +109,26 @@ public class ComicSeriesListingActivity extends Activity {
         lv.requestFocus();
     }
 
+    //needed to watch as text is typed into the edit box
+    private TextWatcher filterTextWatcher = new TextWatcher() {
+
+        public void afterTextChanged(Editable s) {
+        }
+
+        public void beforeTextChanged(CharSequence s, int start, int count,
+                                      int after) {
+        }
+
+        public void onTextChanged(CharSequence s, int start, int before,
+                                  int count) {
+
+            ListView lv = (ListView)findViewById(R.id.comic_series_list);
+            ((CursorAdapter)lv.getAdapter()).changeCursor(RefreshListCursor());
+        }
+    };
+
+
+
     @Override
     public void onResume() {
         super.onResume();
@@ -148,20 +152,34 @@ public class ComicSeriesListingActivity extends Activity {
     public Cursor RefreshListCursor(){
         SQLiteDatabase db = mBackIssuesDatabase.getReadableDatabase();
 
-// Define a projection that specifies which columns from the database
-// you will actually use after this query.
+
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
         String[] projection = {
                 ComicSeriesContract.ComicSeriesEntry._ID,
                 ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE
         };
 
-// How you want the results sorted in the resulting Cursor
+
+        // How you want the results sorted in the resulting Cursor
         String sortOrder =
                 ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE + " ASC;";
+
+        //see if we need to filter the cursor based on the current filter text
+        EditText editText = (EditText) findViewById(R.id.comic_series_text_entry);
+        String filterText = editText.getText().toString();
+        String row_select = null;
+        if(filterText != "") {
+            row_select = "UPPER(" + ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE + ") LIKE UPPER('%" +
+                    filterText + "%')";
+
+        }
+
         Cursor c = db.query(
                 ComicSeriesContract.ComicSeriesEntry.TABLE_NAME,  // The table to query
                 projection,                               // The columns to return
-                null,                                // The columns for the WHERE clause
+                row_select,                                // The columns for the WHERE clause
                 null,                            // The values for the WHERE clause
                 null,                                     // don't group the rows
                 null,                                     // don't filter by row groups
