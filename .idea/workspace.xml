@@ -21,7 +21,7 @@
     <file path="$PROJECT_DIR$/BackIssues/src/main/res/values-sw720dp-land/dimens.xml" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1370043577912" ignored="false" />
     <file path="/activity_comic_series_listing.xml" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1369333018662" ignored="false" />
     <file path="/ComicSeriesListingActivity.java" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1370387832141" ignored="false" />
-    <file path="$PROJECT_DIR$/BackIssues/build/source/r/debug/brian/ruth/backissues/R.java" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1370388598090" ignored="false" />
+    <file path="$PROJECT_DIR$/BackIssues/build/source/r/debug/brian/ruth/backissues/R.java" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1370389091426" ignored="false" />
     <file path="/comic_series_list_item_layout.xml" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1369267310273" ignored="false" />
     <file path="/Dummy.txt" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1369263971951" ignored="false" />
     <file path="/ComicDetailListingActivity.java" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1370388315201" ignored="false" />
@@ -163,31 +163,26 @@
             <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesListingActivity.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state line="110" column="0" selection-start="4548" selection-end="4548" vertical-scroll-proportion="0.0">
-                  <folding>
-                    <element signature="e#1988#2743#0" expanded="true" />
-                    <element signature="e#2732#2733#0" expanded="true" />
-                    <element signature="e#2922#4439#0" expanded="true" />
-                    <element signature="e#3457#4087#0" expanded="true" />
-                    <element signature="e#4068#4069#0" expanded="true" />
-                    <element signature="e#4427#4428#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/BackIssues/src/main/AndroidManifest.xml">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="13" column="26" selection-start="418" selection-end="418" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="strings.xml" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="AndroidManifest.xml" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/BackIssues/src/main/AndroidManifest.xml">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="8" column="40" selection-start="293" selection-end="293" vertical-scroll-proportion="0.12591815">
+                  <folding>
+                    <element signature="e#414#432#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="strings.xml" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/BackIssues/src/main/res/values/strings.xml">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="10" column="0" selection-start="374" selection-end="374" vertical-scroll-proportion="0.15739769">
+                <state line="10" column="0" selection-start="374" selection-end="374" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -230,7 +225,7 @@
           <file leaf-file-name="ComicDetailListingActivity.java" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicDetailListingActivity.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="180" column="27" selection-start="7564" selection-end="7564" vertical-scroll-proportion="-0.7723404">
+                <state line="180" column="27" selection-start="7564" selection-end="7564" vertical-scroll-proportion="0.015957447">
                   <folding />
                 </state>
               </provider>
@@ -279,6 +274,7 @@
         <option value="$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesListingActivity.java" />
         <option value="$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicDetailListingActivity.java" />
         <option value="$PROJECT_DIR$/BackIssues/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/BackIssues/src/main/AndroidManifest.xml" />
       </list>
     </option>
   </component>
@@ -314,8 +310,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -518,16 +512,18 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="AVD_for_4_7in_WXGA" />
-    <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="MemberChooser.showClasses" value="true" />
+    <property name="recentsLimit" value="5" />
     <property name="FullScreen" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="a5189bcb" />
     <property name="MemberChooser.copyJavadoc" value="false" />
@@ -691,11 +687,12 @@
       <workItem from="1370045722391" duration="48000" />
       <workItem from="1370302571382" duration="3014000" />
       <workItem from="1370385022361" duration="3670000" />
+      <workItem from="1370388992373" duration="99000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27585000" />
+    <option name="totallyTimeSpent" value="27684000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -735,7 +732,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17680687" sideWeight="0.67192864" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3280714" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3280714" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993057" sideWeight="0.67192864" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993057" sideWeight="0.67192864" order="3" side_tool="false" content_ui="tabs" />
@@ -816,14 +813,7 @@
     <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesListingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="93" column="67" selection-start="3986" selection-end="3987" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#1988#2743#0" expanded="true" />
-            <element signature="e#2732#2733#0" expanded="true" />
-            <element signature="e#2922#4439#0" expanded="true" />
-            <element signature="e#3457#4087#0" expanded="true" />
-            <element signature="e#4068#4069#0" expanded="true" />
-            <element signature="e#4427#4428#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -915,38 +905,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicDetailListingActivity.java">
+    <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesListingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="180" column="27" selection-start="7564" selection-end="7564" vertical-scroll-proportion="-0.7723404">
+        <state line="110" column="0" selection-start="4548" selection-end="4548" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesListingActivity.java">
+    <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicDetailListingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="110" column="0" selection-start="4548" selection-end="4548" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#1988#2743#0" expanded="true" />
-            <element signature="e#2732#2733#0" expanded="true" />
-            <element signature="e#2922#4439#0" expanded="true" />
-            <element signature="e#3457#4087#0" expanded="true" />
-            <element signature="e#4068#4069#0" expanded="true" />
-            <element signature="e#4427#4428#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BackIssues/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="26" selection-start="418" selection-end="418" vertical-scroll-proportion="0.0">
+        <state line="180" column="27" selection-start="7564" selection-end="7564" vertical-scroll-proportion="0.015957447">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BackIssues/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="374" selection-end="374" vertical-scroll-proportion="0.15739769">
+        <state line="10" column="0" selection-start="374" selection-end="374" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BackIssues/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="40" selection-start="293" selection-end="293" vertical-scroll-proportion="0.12591815">
+          <folding>
+            <element signature="e#414#432#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
