@@ -20,7 +20,7 @@
     <file path="$PROJECT_DIR$/BackIssues/src/main/res/values-sw600dp/dimens.xml" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1370043577912" ignored="false" />
     <file path="$PROJECT_DIR$/BackIssues/src/main/res/values-sw720dp-land/dimens.xml" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1370043577912" ignored="false" />
     <file path="/activity_comic_series_listing.xml" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1369333018662" ignored="false" />
-    <file path="/ComicSeriesListingActivity.java" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1370303523972" ignored="false" />
+    <file path="/ComicSeriesListingActivity.java" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1370304456893" ignored="false" />
     <file path="$PROJECT_DIR$/BackIssues/build/source/r/debug/brian/ruth/backissues/R.java" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1370045329946" ignored="false" />
     <file path="/comic_series_list_item_layout.xml" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1369267310273" ignored="false" />
     <file path="/Dummy.txt" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1369263971951" ignored="false" />
@@ -110,7 +110,7 @@
           <file leaf-file-name="BackIssuesDBHelper.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/BackIssuesDBHelper.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="19" column="32" selection-start="610" selection-end="610" vertical-scroll-proportion="0.0">
+                <state line="45" column="0" selection-start="1950" selection-end="1950" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -128,10 +128,24 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ComicSeriesListingActivity.java" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="ComicSeriesListingActivity.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesListingActivity.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="87" column="102" selection-start="3376" selection-end="3376" vertical-scroll-proportion="0.26757607">
+                <state line="94" column="0" selection-start="3686" selection-end="3686" vertical-scroll-proportion="0.0">
+                  <folding>
+                    <element signature="e#3458#4975#0" expanded="true" />
+                    <element signature="e#3993#4623#0" expanded="true" />
+                    <element signature="e#4604#4605#0" expanded="true" />
+                    <element signature="e#4963#4964#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ComicSeriesContract.java" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesContract.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="19" column="62" selection-start="572" selection-end="572" vertical-scroll-proportion="0.2990556">
                   <folding />
                 </state>
               </provider>
@@ -165,7 +179,7 @@
           <file leaf-file-name="ComicDetailListingActivity.java" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicDetailListingActivity.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="255" column="17" selection-start="10791" selection-end="10791" vertical-scroll-proportion="0.46595743">
+                <state line="119" column="13" selection-start="5061" selection-end="5061" vertical-scroll-proportion="0.51382977">
                   <folding />
                 </state>
               </provider>
@@ -249,6 +263,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -421,8 +437,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -594,12 +608,12 @@
       <workItem from="1370043568980" duration="71000" />
       <workItem from="1370043944602" duration="1727000" />
       <workItem from="1370045722391" duration="48000" />
-      <workItem from="1370302571382" duration="962000" />
+      <workItem from="1370302571382" duration="2890000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21863000" />
+    <option name="totallyTimeSpent" value="23791000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -639,7 +653,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17490806" sideWeight="0.67192864" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17476521" sideWeight="0.67192864" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3280714" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993057" sideWeight="0.67192864" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -730,7 +744,12 @@
     <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesListingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="93" column="67" selection-start="3986" selection-end="3987" vertical-scroll-proportion="0.0">
-          <folding />
+          <folding>
+            <element signature="e#3458#4975#0" expanded="true" />
+            <element signature="e#3993#4623#0" expanded="true" />
+            <element signature="e#4604#4605#0" expanded="true" />
+            <element signature="e#4963#4964#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -752,11 +771,6 @@
         <state line="8" column="42" selection-start="374" selection-end="374" vertical-scroll-proportion="0.0">
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesContract.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="48" selection-start="360" selection-end="377" vertical-scroll-proportion="0.13626835" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BackIssues/src/main/res/values/strings.xml">
@@ -811,13 +825,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicDetailListingActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="255" column="17" selection-start="10791" selection-end="10791" vertical-scroll-proportion="0.46595743">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesCursorAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="46" selection-start="856" selection-end="856" vertical-scroll-proportion="0.0">
@@ -827,14 +834,33 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/BackIssuesDBHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="32" selection-start="610" selection-end="610" vertical-scroll-proportion="0.0">
+        <state line="45" column="0" selection-start="1950" selection-end="1950" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicDetailListingActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="119" column="13" selection-start="5061" selection-end="5061" vertical-scroll-proportion="0.51382977">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesListingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="87" column="102" selection-start="3376" selection-end="3376" vertical-scroll-proportion="0.26757607">
+        <state line="94" column="0" selection-start="3686" selection-end="3686" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#3458#4975#0" expanded="true" />
+            <element signature="e#3993#4623#0" expanded="true" />
+            <element signature="e#4604#4605#0" expanded="true" />
+            <element signature="e#4963#4964#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesContract.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="62" selection-start="572" selection-end="572" vertical-scroll-proportion="0.2990556">
           <folding />
         </state>
       </provider>

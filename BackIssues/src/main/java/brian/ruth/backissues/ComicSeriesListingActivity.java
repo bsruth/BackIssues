@@ -1,15 +1,21 @@
 package brian.ruth.backissues;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
-import android.widget.*;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.CursorAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
 
 public class ComicSeriesListingActivity extends Activity {
 
@@ -59,6 +65,8 @@ public class ComicSeriesListingActivity extends Activity {
         ComicSeriesCursorAdapter adapter = new ComicSeriesCursorAdapter(this, c, true);
         adapter.db = mBackIssuesDatabase.getReadableDatabase();
         lv.setAdapter(adapter);
+
+        //single click to see the issues for a series
         lv.setClickable(true);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -73,6 +81,44 @@ public class ComicSeriesListingActivity extends Activity {
 
                 startActivity(intent);
             }
+        });
+
+        //long click to remove a series
+        //TODO: possibly long click to change things as well.
+        lv.setLongClickable(true);
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Cursor c2 = (Cursor)lv.getItemAtPosition(i);
+
+
+                String seriesTitle = c2.getString(c2.getColumnIndex(ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE));
+                final int seriesID = c2.getInt(c2.getColumnIndex(ComicSeriesContract.ComicSeriesEntry._ID));
+
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                //Yes button clicked
+                                removeComicSeries(seriesID);
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                builder.setMessage("Do you want to delete " + seriesTitle + "?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+
+                return true;
+            }
+
         });
 
         //set focus to listview must be done last or we don't get focus
@@ -144,6 +190,36 @@ public class ComicSeriesListingActivity extends Activity {
         }
 
         editText.setText("");
+        ListView lv = (ListView)findViewById(R.id.comic_series_list);
+        ((CursorAdapter)lv.getAdapter()).changeCursor(RefreshListCursor());
+        lv.requestFocus();
+    }
+
+
+    public void removeComicSeries(int seriesID) {
+        try {
+            //todo: see if series already in database before adding again
+            SQLiteDatabase db = mBackIssuesDatabase.getWritableDatabase();
+
+            //delete all items from issue table first
+            String whereClause = ComicSeriesContract.ComicIssueEntry.COLUMN_SERIES_ID + "=" + seriesID;
+            db.delete( ComicSeriesContract.ComicIssueEntry.TABLE_NAME,
+                    whereClause,
+                    null
+            );
+
+            //now remove series from series table
+            whereClause = ComicSeriesContract.ComicSeriesEntry._ID + "=" + seriesID;
+            db.delete(ComicSeriesContract.ComicSeriesEntry.TABLE_NAME,
+                    whereClause,
+                    null
+            );
+
+        }catch (Exception e) {
+            //todo: do something meaningful
+            String ex = e.toString();
+        }
+
         ListView lv = (ListView)findViewById(R.id.comic_series_list);
         ((CursorAdapter)lv.getAdapter()).changeCursor(RefreshListCursor());
         lv.requestFocus();
