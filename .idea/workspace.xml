@@ -24,7 +24,7 @@
     <file path="$PROJECT_DIR$/BackIssues/build/source/r/debug/brian/ruth/backissues/R.java" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1370045329946" ignored="false" />
     <file path="/comic_series_list_item_layout.xml" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1369267310273" ignored="false" />
     <file path="/Dummy.txt" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1369263971951" ignored="false" />
-    <file path="/ComicDetailListingActivity.java" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1369782223888" ignored="false" />
+    <file path="/ComicDetailListingActivity.java" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1370388315201" ignored="false" />
     <file path="/activity_comic_detail_listing.xml" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1369332941699" ignored="false" />
     <file path="/strings.xml" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1369180992766" ignored="false" />
     <file path="/comic_issue_list_item_layout.xml" changelist="00f9fac7-76a7-4e75-80ad-e31b55ea6761" time="1369333367353" ignored="false" />
@@ -83,7 +83,38 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint url="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicDetailListingActivity.java" line="244" class="brian.ruth.backissues.ComicDetailListingActivity" package="brian.ruth.backissues">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicDetailListingActivity.java" line="264" class="brian.ruth.backissues.ComicDetailListingActivity" package="brian.ruth.backissues">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -128,10 +159,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ComicSeriesListingActivity.java" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="ComicSeriesListingActivity.java" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesListingActivity.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="34" column="83" selection-start="1314" selection-end="1314" vertical-scroll-proportion="0.31764707">
+                <state line="119" column="9" selection-start="4869" selection-end="4869" vertical-scroll-proportion="0.6">
                   <folding>
                     <element signature="e#1988#2743#0" expanded="true" />
                     <element signature="e#2732#2733#0" expanded="true" />
@@ -178,10 +209,10 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="ComicDetailListingActivity.java" pinned="false" current="false" current-in-tab="true">
+          <file leaf-file-name="ComicDetailListingActivity.java" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicDetailListingActivity.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="95" column="7" selection-start="3895" selection-end="3895" vertical-scroll-proportion="0.017921148">
+                <state line="180" column="27" selection-start="7564" selection-end="7564" vertical-scroll-proportion="-0.86738354">
                   <folding />
                 </state>
               </provider>
@@ -226,10 +257,10 @@
         <option value="$PROJECT_DIR$/BackIssues/src/main/res/layout/activity_comic_series_listing.xml" />
         <option value="$PROJECT_DIR$/BackIssues/src/main/res/layout/activity_comic_detail_listing.xml" />
         <option value="$PROJECT_DIR$/BackIssues/src/main/res/layout/comic_issue_list_item_layout.xml" />
-        <option value="$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicDetailListingActivity.java" />
         <option value="$PROJECT_DIR$/BackIssues/src/main/res/layout/comic_series_list_item_layout.xml" />
         <option value="$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesCursorAdapter.java" />
         <option value="$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesListingActivity.java" />
+        <option value="$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicDetailListingActivity.java" />
       </list>
     </option>
   </component>
@@ -611,12 +642,12 @@
       <workItem from="1370043944602" duration="1727000" />
       <workItem from="1370045722391" duration="48000" />
       <workItem from="1370302571382" duration="3014000" />
-      <workItem from="1370385022361" duration="2828000" />
+      <workItem from="1370385022361" duration="3433000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26743000" />
+    <option name="totallyTimeSpent" value="27348000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -837,13 +868,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicDetailListingActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="7" selection-start="3895" selection-end="3895" vertical-scroll-proportion="0.017921148">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesContract.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="28" column="0" selection-start="893" selection-end="893" vertical-scroll-proportion="0.0">
@@ -860,7 +884,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesListingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="83" selection-start="1314" selection-end="1314" vertical-scroll-proportion="0.31764707">
+        <state line="119" column="9" selection-start="4869" selection-end="4869" vertical-scroll-proportion="0.6">
           <folding>
             <element signature="e#1988#2743#0" expanded="true" />
             <element signature="e#2732#2733#0" expanded="true" />
@@ -869,6 +893,13 @@
             <element signature="e#4068#4069#0" expanded="true" />
             <element signature="e#4427#4428#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicDetailListingActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="180" column="27" selection-start="7564" selection-end="7564" vertical-scroll-proportion="-0.86738354">
+          <folding />
         </state>
       </provider>
     </entry>

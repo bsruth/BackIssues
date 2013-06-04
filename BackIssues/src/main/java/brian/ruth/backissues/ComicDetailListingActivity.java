@@ -7,14 +7,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.SpannableString;
+import android.text.TextWatcher;
 import android.text.style.StrikethroughSpan;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnKeyListener;
 import android.widget.AdapterView;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
@@ -50,25 +50,7 @@ public class ComicDetailListingActivity extends Activity {
         setTitle(seriesTitle);
 
         EditText textEntry = (EditText) findViewById(R.id.comic_issues_text_entry);
-        textEntry.setOnKeyListener(new OnKeyListener()
-        {
-            public boolean onKey(View v, int keyCode, KeyEvent event)
-            {
-                if (event.getAction() == KeyEvent.ACTION_DOWN)
-                {
-                    switch (keyCode)
-                    {
-                        case KeyEvent.KEYCODE_DPAD_CENTER:
-                        case KeyEvent.KEYCODE_ENTER:
-                            addComicIssue(v);
-                            return true;
-                        default:
-                            break;
-                    }
-                }
-                return false;
-            }
-        });
+        textEntry.addTextChangedListener(filterTextWatcher);
 
         mBackIssuesDatabase = new BackIssuesDBHelper(this);
 
@@ -163,6 +145,24 @@ public class ComicDetailListingActivity extends Activity {
         }
     }
 
+    //needed to watch as text is typed into the edit box
+    private TextWatcher filterTextWatcher = new TextWatcher() {
+
+        public void afterTextChanged(Editable s) {
+        }
+
+        public void beforeTextChanged(CharSequence s, int start, int count,
+                                      int after) {
+        }
+
+        public void onTextChanged(CharSequence s, int start, int before,
+                                  int count) {
+
+            ListView lv = (ListView)findViewById(R.id.comic_issue_list);
+            ((CursorAdapter)lv.getAdapter()).changeCursor(RefreshListCursor());
+        }
+    };
+
     //generate a list of all items that are not in the database
     //for this series or are crossed off. This is the list of items
     //that are owned for this series.
@@ -239,6 +239,15 @@ public class ComicDetailListingActivity extends Activity {
         //String sortOrder =
         //        ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER + " ASC;";
         String rowSelection = ComicSeriesContract.ComicIssueEntry.COLUMN_SERIES_ID + "=" + mSeriesID;
+
+        //see if we need to filter the cursor based on the current filter text
+        EditText editText = (EditText) findViewById(R.id.comic_issues_text_entry);
+        String filterText = editText.getText().toString();
+        if(filterText != "") {
+            rowSelection = rowSelection + " AND UPPER(" + ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER+ ") LIKE UPPER('" +
+                    filterText + "%')";
+
+        }
 
         try {
         Cursor c = db.query(
