@@ -301,7 +301,7 @@ public class ComicDetailListingActivity extends Activity {
         editText.setText("");
         ListView lv = (ListView)findViewById(R.id.comic_issue_list);
         ((CursorAdapter)lv.getAdapter()).changeCursor(RefreshListCursor());
-        lv.requestFocus();
+        editText.requestFocus();
     }
 
     //** used to add a group of issues at once
