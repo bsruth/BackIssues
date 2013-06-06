@@ -313,8 +313,7 @@ public class ComicDetailListingActivity extends Activity {
         Pattern pattern = Pattern.compile("(\\d+)\\s*\\-\\s*(\\d+)");
 
         Matcher matcher = pattern.matcher(addString);
-        matcher.find();
-        if(matcher.groupCount() >= 2) {
+        if(matcher.matches()) {
             int startNumber = Integer.parseInt(matcher.group(1));
             int endNumber = Integer.parseInt(matcher.group(2));
 
