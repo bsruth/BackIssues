@@ -24,6 +24,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by brian on 5/21/13.
@@ -273,17 +275,23 @@ public class ComicDetailListingActivity extends Activity {
     public void addComicIssue(View view) {
         EditText editText = (EditText) findViewById(R.id.comic_issues_text_entry);
         String issueNumber = editText.getText().toString();
+
+        //parse to see if we are adding a list
+        ArrayList<String> issuesToAdd = ParseIssuesToAdd(issueNumber);
         try {
             //todo: see if series already in database before adding again
             SQLiteDatabase db = mBackIssuesDatabase.getWritableDatabase();
-            if(isDuplicateOrEmptyIssue(issueNumber, db) == false){
-                ContentValues values = new ContentValues();
-                values.put(ComicSeriesContract.ComicIssueEntry.COLUMN_SERIES_ID, mSeriesID);
-                values.put(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER, issueNumber);
-                values.put(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_CHECKED_OFF, BackIssuesDBHelper.SQL_FALSE);
+            for(int issue = 0; issue < issuesToAdd.size(); ++issue ) {
+                String issueToAdd = issuesToAdd.get(issue);
+                if(isDuplicateOrEmptyIssue(issueToAdd, db) == false){
+                    ContentValues values = new ContentValues();
+                    values.put(ComicSeriesContract.ComicIssueEntry.COLUMN_SERIES_ID, mSeriesID);
+                    values.put(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER, issueToAdd);
+                    values.put(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_CHECKED_OFF, BackIssuesDBHelper.SQL_FALSE);
 
 
-                long newRowID = db.insert(ComicSeriesContract.ComicIssueEntry.TABLE_NAME, "null", values);
+                    long newRowID = db.insert(ComicSeriesContract.ComicIssueEntry.TABLE_NAME, "null", values);
+                }
             }
         }catch (Exception e) {
             //todo: do something meaningful
@@ -295,6 +303,33 @@ public class ComicDetailListingActivity extends Activity {
         ((CursorAdapter)lv.getAdapter()).changeCursor(RefreshListCursor());
         lv.requestFocus();
     }
+
+    //** used to add a group of issues at once
+    private ArrayList<String> ParseIssuesToAdd(String addString)
+    {
+        ArrayList<String> issuesToAdd = new ArrayList<String>();
+
+        //todo: doesn't handle decimal issues or things like "annual 1 - 10"
+        Pattern pattern = Pattern.compile("(\\d+)\\s*\\-\\s*(\\d+)");
+
+        Matcher matcher = pattern.matcher(addString);
+        matcher.find();
+        if(matcher.groupCount() >= 2) {
+            int startNumber = Integer.parseInt(matcher.group(1));
+            int endNumber = Integer.parseInt(matcher.group(2));
+
+            for(int issueNumber = startNumber; issueNumber <= endNumber; ++issueNumber){
+                issuesToAdd.add(String.valueOf(issueNumber) );
+            }
+        } else {
+            //wasn't a range add, just put in the text passed to this function
+            issuesToAdd.add(addString);
+        }
+
+
+        return issuesToAdd;
+    }
+
 
     private boolean isDuplicateOrEmptyIssue(String issue, SQLiteDatabase db)
     {
