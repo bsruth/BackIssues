@@ -18,6 +18,18 @@ import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class ComicSeriesListingActivity extends Activity {
 
     //activity messages
@@ -148,6 +160,47 @@ public class ComicSeriesListingActivity extends Activity {
         return true;
     }
 
+    public ArrayList<String> searchComicBookDB(String searchString) {
+
+        ArrayList<String> searchResults = new ArrayList<String>();
+
+        try {
+
+            HttpClient client = new DefaultHttpClient();
+            //TODO: format the search string for the comicbookdb search
+            String url = "http://mobile.comicbookdb.com/search.php?form_search=Detective+Comics&form_searchtype=Title";
+            HttpGet request = new HttpGet(url);
+            HttpResponse response = client.execute(request);
+            InputStream in = response.getEntity().getContent();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            StringBuilder str = new StringBuilder();
+            String line = null;
+            while((line = reader.readLine()) != null)
+            {
+                str.append(line);
+            }
+            in.close();
+
+
+            String html = str.toString();
+
+
+            //find all links to tiltes in the search
+            //TODO: right now the only non-word charactes supported in titles are :'
+            Pattern pattern = Pattern.compile("<a href=\"title.php\\?ID=(\\d+)\">([\\w\\s:']+)\\((\\d+)\\)</a>\\s*\\(([\\w\\s]+)\\)\\s*<br>");
+
+            Matcher matcher = pattern.matcher(html);
+            while(matcher.find()) {
+                searchResults.add(matcher.group(2));
+            }
+        } catch (Exception ex) {
+            String e = ex.toString();
+        }
+
+
+        return searchResults;
+    }
 
     public Cursor RefreshListCursor(){
         SQLiteDatabase db = mBackIssuesDatabase.getReadableDatabase();
@@ -193,6 +246,9 @@ public class ComicSeriesListingActivity extends Activity {
     public void addComicSeries(View view) {
         EditText editText = (EditText) findViewById(R.id.comic_series_text_entry);
         String seriesTitle = editText.getText().toString();
+
+        ArrayList<String> searchResults =  searchComicBookDB(seriesTitle);
+
         try {
             //todo: see if series already in database before adding again
             SQLiteDatabase db = mBackIssuesDatabase.getWritableDatabase();
