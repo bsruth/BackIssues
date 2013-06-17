@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
@@ -26,6 +27,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -165,10 +167,12 @@ public class ComicSeriesListingActivity extends Activity {
         ArrayList<String> searchResults = new ArrayList<String>();
 
         try {
+            //converts all special chars to their % equivalents for URLs
+            String encodedSerchString = URLEncoder.encode(searchString, "utf-8");
 
             HttpClient client = new DefaultHttpClient();
             //TODO: format the search string for the comicbookdb search
-            String url = "http://mobile.comicbookdb.com/search.php?form_search=Detective+Comics&form_searchtype=Title";
+            String url = "http://mobile.comicbookdb.com/search.php?form_search=" + encodedSerchString + "&form_searchtype=Title";
             HttpGet request = new HttpGet(url);
             HttpResponse response = client.execute(request);
             InputStream in = response.getEntity().getContent();
@@ -187,12 +191,13 @@ public class ComicSeriesListingActivity extends Activity {
 
 
             //find all links to tiltes in the search
-            //TODO: right now the only non-word charactes supported in titles are :'
-            Pattern pattern = Pattern.compile("<a href=\"title.php\\?ID=(\\d+)\">([\\w\\s:']+)\\((\\d+)\\)</a>\\s*\\(([\\w\\s]+)\\)\\s*<br>");
+            //NOTE: \\p{P} is supposedly all punctuation
+            Pattern pattern = Pattern.compile("<a href=\"title.php\\?ID=(\\d+)\">([\\w\\s\\p{P}]+)\\((\\d+)\\)</a>\\s*\\(([\\w\\s]+)\\)\\s*<br>");
 
             Matcher matcher = pattern.matcher(html);
             while(matcher.find()) {
-                searchResults.add(matcher.group(2));
+                //fromHTML decodes all HTML special chars to printable chars (e.g. amp; to &)
+                searchResults.add( Html.fromHtml(matcher.group(2)).toString() + " " + Html.fromHtml(matcher.group(3)).toString());
             }
         } catch (Exception ex) {
             String e = ex.toString();

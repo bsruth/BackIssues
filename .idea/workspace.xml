@@ -31,7 +31,7 @@
   </component>
   <component name="DebuggerManager">
     <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesListingActivity.java" line="201" class="brian.ruth.backissues.ComicSeriesListingActivity" package="brian.ruth.backissues">
+      <breakpoint url="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesListingActivity.java" line="206" class="brian.ruth.backissues.ComicSeriesListingActivity" package="brian.ruth.backissues">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -46,7 +46,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesListingActivity.java" line="197" class="brian.ruth.backissues.ComicSeriesListingActivity" package="brian.ruth.backissues">
+      <breakpoint url="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesListingActivity.java" line="202" class="brian.ruth.backissues.ComicSeriesListingActivity" package="brian.ruth.backissues">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -111,16 +111,8 @@
       <file leaf-file-name="ComicSeriesListingActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesListingActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="0" selection-start="32" selection-end="32" vertical-scroll-proportion="0.036275696" vertical-offset="0" max-vertical-offset="4605">
-              <folding>
-                <element signature="e#2355#3110#0" expanded="true" />
-                <element signature="e#3099#3100#0" expanded="true" />
-                <element signature="e#3289#4806#0" expanded="true" />
-                <element signature="e#3824#4454#0" expanded="true" />
-                <element signature="e#4435#4436#0" expanded="true" />
-                <element signature="e#4794#4795#0" expanded="true" />
-                <element signature="e#6314#6322#0" expanded="true" />
-              </folding>
+            <state line="254" column="74" selection-start="10066" selection-end="10066" vertical-scroll-proportion="0.47763" vertical-offset="2815" max-vertical-offset="4500">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -128,10 +120,8 @@
       <file leaf-file-name="ComicDetailListingActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicDetailListingActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="299" column="0" selection-start="12766" selection-end="12766" vertical-scroll-proportion="-16.642857" vertical-offset="3944" max-vertical-offset="5400">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="299" column="0" selection-start="12766" selection-end="12766" vertical-scroll-proportion="0.0" vertical-offset="4470" max-vertical-offset="5475">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -192,7 +182,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="65" />
+    <option name="x" value="-2488" />
     <option name="y" value="24" />
     <option name="width" value="2495" />
     <option name="height" value="1576" />
@@ -223,6 +213,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -395,8 +387,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -411,10 +401,10 @@
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="AVD_for_4_7in_WXGA" />
     <property name="FullScreen" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
-    <property name="GoToClass.includeLibraries" value="false" />
     <property name="last.edited.regexp" value="&lt;a href=&quot;title.php?ID=26456&quot;&gt;Detective Comics: Classics (2011)&lt;/a&gt; (DC Comics)&lt;br&gt;" />
-    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="GoToClass.includeLibraries" value="false" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RunManager" selected="Android Application.BackIssues-BackIssues">
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
@@ -604,7 +594,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="2495" height="1576" extended-state="0" />
+    <frame x="-2488" y="24" width="2495" height="1576" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993057" sideWeight="0.67192864" order="2" side_tool="false" content_ui="tabs" />
@@ -698,15 +688,7 @@
     <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesListingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="93" column="67" selection-start="3986" selection-end="3987" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <folding>
-            <element signature="e#2355#3110#0" expanded="true" />
-            <element signature="e#3099#3100#0" expanded="true" />
-            <element signature="e#3289#4806#0" expanded="true" />
-            <element signature="e#3824#4454#0" expanded="true" />
-            <element signature="e#4435#4436#0" expanded="true" />
-            <element signature="e#4794#4795#0" expanded="true" />
-            <element signature="e#6314#6322#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -817,25 +799,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicDetailListingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="299" column="0" selection-start="12766" selection-end="12766" vertical-scroll-proportion="-16.642857" vertical-offset="3944" max-vertical-offset="5400">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="299" column="0" selection-start="12766" selection-end="12766" vertical-scroll-proportion="0.0" vertical-offset="4470" max-vertical-offset="5475">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BackIssues/src/main/java/brian/ruth/backissues/ComicSeriesListingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="32" selection-end="32" vertical-scroll-proportion="0.036275696" vertical-offset="0" max-vertical-offset="4605">
-          <folding>
-            <element signature="e#2355#3110#0" expanded="true" />
-            <element signature="e#3099#3100#0" expanded="true" />
-            <element signature="e#3289#4806#0" expanded="true" />
-            <element signature="e#3824#4454#0" expanded="true" />
-            <element signature="e#4435#4436#0" expanded="true" />
-            <element signature="e#4794#4795#0" expanded="true" />
-            <element signature="e#6314#6322#0" expanded="true" />
-          </folding>
+        <state line="254" column="74" selection-start="10066" selection-end="10066" vertical-scroll-proportion="0.47763" vertical-offset="2815" max-vertical-offset="4500">
+          <folding />
         </state>
       </provider>
     </entry>
