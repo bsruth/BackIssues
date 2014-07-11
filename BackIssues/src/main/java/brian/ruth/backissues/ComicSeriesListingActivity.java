@@ -69,15 +69,10 @@ public class ComicSeriesListingActivity extends Activity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(view.getContext(), ComicDetailListingActivity.class);
                 Cursor c2 = (Cursor)lv.getItemAtPosition(i);
-                String seriesID = c2.getString(c2.getColumnIndex(ComicSeriesContract.ComicSeriesEntry._ID));
-                intent.putExtra(SELECTED_COMIC_SERIES_ID, seriesID);
-
+                long seriesID = c2.getLong(c2.getColumnIndex(ComicSeriesContract.ComicSeriesEntry._ID));
                 String seriesTitle = c2.getString(c2.getColumnIndex(ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE));
-                intent.putExtra(SELECTED_COMIC_SERIES_TITLE, seriesTitle);
-
-                startActivity(intent);
+               openComicDetailListingActivity(view, seriesTitle, seriesID);
             }
         });
 
@@ -254,14 +249,21 @@ public class ComicSeriesListingActivity extends Activity {
 
         ArrayList<String> searchResults =  searchComicBookDB(seriesTitle);
 
+        long newRowID = 0;
         try {
+            //SelectComicbookDBSeriesDialog selectionDlg = new SelectComicbookDBSeriesDialog();
+            //selectionDlg.selctionOptions = new String[searchResults.size()];
+            //selectionDlg.selctionOptions = searchResults.toArray(selectionDlg.selctionOptions);
+            //selectionDlg.show(getSupportFragmentManager(), "SelectComicbookDBSeriesDialog");
+            //String item = selectionDlg.selectedItem;
+
             //todo: see if series already in database before adding again
             SQLiteDatabase db = mBackIssuesDatabase.getWritableDatabase();
             if(isDuplicateOrEmptyTitle(seriesTitle, db) == false) {
                 ContentValues values = new ContentValues();
                 values.put(ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE, seriesTitle);
 
-                long newRowID = db.insert(ComicSeriesContract.ComicSeriesEntry.TABLE_NAME, "null", values);
+                newRowID = db.insert(ComicSeriesContract.ComicSeriesEntry.TABLE_NAME, "null", values);
             }
         }catch (Exception e) {
             //todo: do something meaningful
@@ -269,9 +271,14 @@ public class ComicSeriesListingActivity extends Activity {
         }
 
         editText.setText("");
-        ListView lv = (ListView)findViewById(R.id.comic_series_list);
-        ((CursorAdapter)lv.getAdapter()).changeCursor(RefreshListCursor());
-        lv.requestFocus();
+        openComicDetailListingActivity(view, seriesTitle, newRowID);
+    }
+
+    private void openComicDetailListingActivity(View view, String seriesTitle, long seriesID) {
+        Intent intent = new Intent(view.getContext(), ComicDetailListingActivity.class);
+        intent.putExtra(SELECTED_COMIC_SERIES_ID, seriesID);
+        intent.putExtra(SELECTED_COMIC_SERIES_TITLE, seriesTitle);
+        startActivity(intent);
     }
 
 
