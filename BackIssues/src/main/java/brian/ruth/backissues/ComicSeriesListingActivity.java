@@ -276,7 +276,7 @@ public class ComicSeriesListingActivity extends Activity {
 
     private void openComicDetailListingActivity(View view, String seriesTitle, long seriesID) {
         Intent intent = new Intent(view.getContext(), ComicDetailListingActivity.class);
-        intent.putExtra(SELECTED_COMIC_SERIES_ID, seriesID);
+        intent.putExtra(SELECTED_COMIC_SERIES_ID, Long.toString(seriesID));
         intent.putExtra(SELECTED_COMIC_SERIES_TITLE, seriesTitle);
         startActivity(intent);
     }
