@@ -217,7 +217,7 @@ public class ComicSeriesListingActivity extends Activity {
 
         // How you want the results sorted in the resulting Cursor
         String sortOrder =
-                ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE + " ASC;";
+                ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE + " COLLATE NOCASE ASC;";
 
         //see if we need to filter the cursor based on the current filter text
         EditText editText = (EditText) findViewById(R.id.comic_series_text_entry);
