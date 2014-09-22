@@ -13,11 +13,23 @@ dependencies {
 }
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'BrianRuthAndroidKey'
+            keyPassword 'carner'
+            storeFile file('/home/brian/keystores/android.jks')
+            storePassword 'carner'
+        }
+    }
     compileSdkVersion 17
     buildToolsVersion "19.1.0"
-
     defaultConfig {
         minSdkVersion 8
         targetSdkVersion 16
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.config
+        }
     }
 }

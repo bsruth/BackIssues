@@ -1,23 +1,27 @@
 package brian.ruth.backissues;
 
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.backup.BackupManager;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -25,14 +29,19 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URLEncoder;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ComicSeriesListingActivity extends Activity {
+public class ComicSeriesListingActivity extends FragmentActivity {
 
     //activity messages
     public final static String SELECTED_COMIC_SERIES_ID = "brian.ruth.backissues.SELECTED_COMIC_SERIES_ID";
@@ -157,6 +166,68 @@ public class ComicSeriesListingActivity extends Activity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_backupDB:
+                BackupManager bm = new BackupManager(this);
+                bm.dataChanged();
+                BackupToSDCard();
+                return true;
+            case R.id.action_restoreDB:
+                RestoreFromSDCard();
+            //    BackupManager bm2 = new BackupManager(this);
+             //   int retVal = bm2.requestRestore();
+              // return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void BackupToSDCard() {
+            File sd = Environment.getExternalStorageDirectory();
+            File data = Environment.getDataDirectory();
+            FileChannel source=null;
+            FileChannel destination=null;
+            String currentDBPath = "/data/"+ "brian.ruth.backissues" +"/databases/"+BackIssuesDBHelper.DATABASE_NAME;
+            String backupDBPath = BackIssuesDBHelper.DATABASE_NAME;
+            File currentDB = new File(data, currentDBPath);
+            File backupDB = new File(sd, backupDBPath);
+            try {
+                source = new FileInputStream(currentDB).getChannel();
+                destination = new FileOutputStream(backupDB).getChannel();
+                destination.transferFrom(source, 0, source.size());
+                source.close();
+                destination.close();
+                Toast.makeText(this, "DB Exported!", Toast.LENGTH_LONG).show();
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
+
+    }
+
+    public void RestoreFromSDCard() {
+        File sd = Environment.getExternalStorageDirectory();
+        File data = Environment.getDataDirectory();
+        FileChannel source=null;
+        FileChannel destination=null;
+        String currentDBPath = "/data/"+ "brian.ruth.backissues" +"/databases/"+BackIssuesDBHelper.DATABASE_NAME;
+        String backupDBPath = BackIssuesDBHelper.DATABASE_NAME;
+        File currentDB = new File(data, currentDBPath);
+        File backupDB = new File(sd, backupDBPath);
+        try {
+            source = new FileInputStream(backupDB).getChannel();
+            destination = new FileOutputStream(currentDB).getChannel();
+            destination.transferFrom(source, 0, source.size());
+            source.close();
+            destination.close();
+            Toast.makeText(this, "DB Restored!, force restart app", Toast.LENGTH_LONG).show();
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+
+    }
     public ArrayList<String> searchComicBookDB(String searchString) {
 
         ArrayList<String> searchResults = new ArrayList<String>();

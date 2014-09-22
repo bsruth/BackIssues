@@ -261,13 +261,13 @@ public class ComicDetailListingActivity extends Activity {
                 null,                                     // don't filter by row groups
                 sortOrder                                 // The sort order
         );
+
             return c;
         } catch (Exception ex) {
 
          String e = ex.toString();
             int i = 0;
         }
-
         return null;
     }
 
@@ -296,6 +296,7 @@ public class ComicDetailListingActivity extends Activity {
         }catch (Exception e) {
             //todo: do something meaningful
             String ex = e.toString();
+            int i = 0;
         }
 
         editText.setText("");

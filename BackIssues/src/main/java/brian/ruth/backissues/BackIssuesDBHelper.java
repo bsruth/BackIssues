@@ -16,6 +16,8 @@ public class BackIssuesDBHelper extends SQLiteOpenHelper {
     public static final int SQL_TRUE = 1; //boolean constants
     public static final int SQL_FALSE = 0;
 
+    public static String DB_PATH;
+    public static String OUTPUT_PATH;
 
     //ComicSeries Table creation
     private static final String SQL_CREATE_ENTRIES =
@@ -50,6 +52,8 @@ public class BackIssuesDBHelper extends SQLiteOpenHelper {
 
     public BackIssuesDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        DB_PATH = context.getDatabasePath(DATABASE_NAME).toString();
+        //OUTPUT_PATH = context.getExternalFilesDir(null).toString();
     }
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_ENTRIES);
