@@ -3,8 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BackIssues.iml" filepath="$PROJECT_DIR$/BackIssues.iml" />
-      <module fileurl="file://$PROJECT_DIR$/BackIssues-BackIssues.iml" filepath="$PROJECT_DIR$/BackIssues-BackIssues.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BackIssues/BackIssues-BackIssues.iml" filepath="$PROJECT_DIR$/BackIssues/BackIssues-BackIssues.iml" />
     </modules>
   </component>
 </project>
-
