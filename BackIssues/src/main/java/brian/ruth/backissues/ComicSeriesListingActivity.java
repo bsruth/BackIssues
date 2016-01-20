@@ -50,6 +50,7 @@ public class ComicSeriesListingActivity extends FragmentActivity {
     //members
     private BackIssuesDBHelper mBackIssuesDatabase; //database used for entire app
     private ComicSeriesCursorAdapter adapter = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -186,47 +187,21 @@ public class ComicSeriesListingActivity extends FragmentActivity {
     }
 
     public void BackupToSDCard() {
-            File sd = Environment.getExternalStorageDirectory();
-            File data = Environment.getDataDirectory();
-            FileChannel source=null;
-            FileChannel destination=null;
-            String currentDBPath = "/data/"+ "brian.ruth.backissues" +"/databases/"+BackIssuesDBHelper.DATABASE_NAME;
-            String backupDBPath = BackIssuesDBHelper.DATABASE_NAME;
-            File currentDB = new File(data, currentDBPath);
-            File backupDB = new File(sd, backupDBPath);
-            try {
-                source = new FileInputStream(currentDB).getChannel();
-                destination = new FileOutputStream(backupDB).getChannel();
-                destination.transferFrom(source, 0, source.size());
-                source.close();
-                destination.close();
-                Toast.makeText(this, "DB Exported!", Toast.LENGTH_LONG).show();
-            } catch(IOException e) {
-                e.printStackTrace();
-            }
-
+        String currentDBPath = "/data/" + "brian.ruth.backissues" + "/databases/" + BackIssuesDBHelper.DATABASE_NAME;
+        if(BackupDBUtilities.BackupToSDCard(currentDBPath)) {
+            Toast.makeText(this, "DB Exported!", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "FAILED to export DB!", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void RestoreFromSDCard() {
-        File sd = Environment.getExternalStorageDirectory();
-        File data = Environment.getDataDirectory();
-        FileChannel source=null;
-        FileChannel destination=null;
         String currentDBPath = "/data/"+ "brian.ruth.backissues" +"/databases/"+BackIssuesDBHelper.DATABASE_NAME;
-        String backupDBPath = BackIssuesDBHelper.DATABASE_NAME;
-        File currentDB = new File(data, currentDBPath);
-        File backupDB = new File(sd, backupDBPath);
-        try {
-            source = new FileInputStream(backupDB).getChannel();
-            destination = new FileOutputStream(currentDB).getChannel();
-            destination.transferFrom(source, 0, source.size());
-            source.close();
-            destination.close();
+        if(BackupDBUtilities.RestoreFromSDCard(currentDBPath)) {
             Toast.makeText(this, "DB Restored!, force restart app", Toast.LENGTH_LONG).show();
-        } catch(IOException e) {
-            e.printStackTrace();
+        } else {
+            Toast.makeText(this, "FAILED To Restore DB", Toast.LENGTH_LONG).show();
         }
-
     }
     public ArrayList<String> searchComicBookDB(String searchString) {
 
