@@ -187,8 +187,7 @@ public class ComicSeriesListingActivity extends FragmentActivity {
     }
 
     public void BackupToSDCard() {
-        String currentDBPath = "/data/" + "brian.ruth.backissues" + "/databases/" + BackIssuesDBHelper.DATABASE_NAME;
-        if(BackupDBUtilities.BackupToSDCard(currentDBPath)) {
+        if(BackupDBUtilities.BackupToSDCard(mBackIssuesDatabase.DB_PATH)) {
             Toast.makeText(this, "DB Exported!", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, "FAILED to export DB!", Toast.LENGTH_LONG).show();
@@ -196,8 +195,7 @@ public class ComicSeriesListingActivity extends FragmentActivity {
     }
 
     public void RestoreFromSDCard() {
-        String currentDBPath = "/data/"+ "brian.ruth.backissues" +"/databases/"+BackIssuesDBHelper.DATABASE_NAME;
-        if(BackupDBUtilities.RestoreFromSDCard(currentDBPath)) {
+        if(BackupDBUtilities.RestoreFromSDCard(mBackIssuesDatabase.DB_PATH)) {
             mBackIssuesDatabase.close();
             mBackIssuesDatabase = new BackIssuesDBHelper(this);
             ListView lv = (ListView)findViewById(R.id.comic_series_list);

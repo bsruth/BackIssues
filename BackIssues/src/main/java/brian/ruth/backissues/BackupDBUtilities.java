@@ -14,8 +14,7 @@ import java.nio.channels.FileChannel;
 public class BackupDBUtilities {
     public static boolean BackupToSDCard(String privateDBPath) {
         File sd = Environment.getExternalStorageDirectory();
-        File data = Environment.getDataDirectory();
-        File currentDB = new File(data, privateDBPath);
+        File currentDB = new File(privateDBPath);
         String dbFileName = currentDB.getName();
         File backupDB = new File(sd, dbFileName);
         return CopyDatabase(currentDB, backupDB);
@@ -23,8 +22,7 @@ public class BackupDBUtilities {
 
     public static boolean RestoreFromSDCard(String privateDBPath ) {
         File sd = Environment.getExternalStorageDirectory();
-        File data = Environment.getDataDirectory();
-        File currentDB = new File(data, privateDBPath);
+        File currentDB = new File(privateDBPath);
         String dbFileName = currentDB.getName();
         File backupDB = new File(sd, dbFileName);
         return CopyDatabase(backupDB, currentDB);
