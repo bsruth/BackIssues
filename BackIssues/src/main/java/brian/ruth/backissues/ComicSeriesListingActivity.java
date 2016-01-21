@@ -198,7 +198,12 @@ public class ComicSeriesListingActivity extends FragmentActivity {
     public void RestoreFromSDCard() {
         String currentDBPath = "/data/"+ "brian.ruth.backissues" +"/databases/"+BackIssuesDBHelper.DATABASE_NAME;
         if(BackupDBUtilities.RestoreFromSDCard(currentDBPath)) {
-            Toast.makeText(this, "DB Restored!, force restart app", Toast.LENGTH_LONG).show();
+            mBackIssuesDatabase.close();
+            mBackIssuesDatabase = new BackIssuesDBHelper(this);
+            ListView lv = (ListView)findViewById(R.id.comic_series_list);
+            ((CursorAdapter)lv.getAdapter()).changeCursor(RefreshListCursor());
+
+            Toast.makeText(this, "DB Restored!", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, "FAILED To Restore DB", Toast.LENGTH_LONG).show();
         }
