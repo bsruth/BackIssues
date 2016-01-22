@@ -16,8 +16,7 @@ public class BackIssuesDBHelper extends SQLiteOpenHelper {
     public static final int SQL_TRUE = 1; //boolean constants
     public static final int SQL_FALSE = 0;
 
-    public static String DB_PATH;
-    public static String OUTPUT_PATH;
+    public String DB_PATH;
 
     //ComicSeries Table creation
     private static final String SQL_CREATE_ENTRIES =

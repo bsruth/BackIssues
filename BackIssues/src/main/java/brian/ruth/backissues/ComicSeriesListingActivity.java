@@ -50,6 +50,7 @@ public class ComicSeriesListingActivity extends FragmentActivity {
     //members
     private BackIssuesDBHelper mBackIssuesDatabase; //database used for entire app
     private ComicSeriesCursorAdapter adapter = null;
+    private MissingSeries missingSeries = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,7 @@ public class ComicSeriesListingActivity extends FragmentActivity {
         textEntry.addTextChangedListener(filterTextWatcher);
 
         mBackIssuesDatabase = new BackIssuesDBHelper(this);
+        missingSeries = new MissingSeries(mBackIssuesDatabase);
 
         Cursor c = RefreshListCursor();
 
@@ -296,31 +298,11 @@ public class ComicSeriesListingActivity extends FragmentActivity {
         EditText editText = (EditText) findViewById(R.id.comic_series_text_entry);
         String seriesTitle = editText.getText().toString();
 
-        ArrayList<String> searchResults =  searchComicBookDB(seriesTitle);
-
-        long newRowID = 0;
-        try {
-            //SelectComicbookDBSeriesDialog selectionDlg = new SelectComicbookDBSeriesDialog();
-            //selectionDlg.selctionOptions = new String[searchResults.size()];
-            //selectionDlg.selctionOptions = searchResults.toArray(selectionDlg.selctionOptions);
-            //selectionDlg.show(getSupportFragmentManager(), "SelectComicbookDBSeriesDialog");
-            //String item = selectionDlg.selectedItem;
-
-            //todo: see if series already in database before adding again
-            SQLiteDatabase db = mBackIssuesDatabase.getWritableDatabase();
-            if(isDuplicateOrEmptyTitle(seriesTitle, db) == false) {
-                ContentValues values = new ContentValues();
-                values.put(ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE, seriesTitle);
-
-                newRowID = db.insert(ComicSeriesContract.ComicSeriesEntry.TABLE_NAME, "null", values);
-            }
-        }catch (Exception e) {
-            //todo: do something meaningful
-            String ex = e.toString();
+        long newSeriesID = missingSeries.addComicSeries(seriesTitle);
+        if(newSeriesID != MissingSeries.INVALID_SERIES_ID) {
+            editText.setText("");
+            openComicDetailListingActivity(view, seriesTitle, newSeriesID);
         }
-
-        editText.setText("");
-        openComicDetailListingActivity(view, seriesTitle, newRowID);
     }
 
     private void openComicDetailListingActivity(View view, String seriesTitle, long seriesID) {
@@ -360,31 +342,6 @@ public class ComicSeriesListingActivity extends FragmentActivity {
         lv.requestFocus();
     }
 
-    private boolean isDuplicateOrEmptyTitle(String title, SQLiteDatabase db)
-    {
-        //check empty or all whitespace
-        //todo: ensure it looks like a valid title e.g. ".@@@7f" is probably invalid
-        if(title.trim().length() == 0 ){
-            return true;
-        }
 
-        String[] projection = { ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE };
-        String rowSelectionQuery = " UPPER(" + ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE + ") = UPPER('" + title + "')";
-        Cursor c =  db.query(
-                ComicSeriesContract.ComicSeriesEntry.TABLE_NAME,  // The table to query
-                projection,                               // The columns to return
-                rowSelectionQuery,                                // The columns for the WHERE clause
-                null,                            // The values for the WHERE clause
-                null,                                     // don't group the rows
-                null,                                     // don't filter by row groups
-                null                                 // The sort order
-        );
-
-        if(c.getCount() == 0) {
-            return false; //nothing matches this item
-        } else {
-            return true;
-        }
-    }
     
 }
