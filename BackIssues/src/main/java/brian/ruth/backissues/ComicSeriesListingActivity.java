@@ -208,50 +208,7 @@ public class ComicSeriesListingActivity extends FragmentActivity {
             Toast.makeText(this, "FAILED To Restore DB", Toast.LENGTH_LONG).show();
         }
     }
-    public ArrayList<String> searchComicBookDB(String searchString) {
 
-        ArrayList<String> searchResults = new ArrayList<String>();
-
-        try {
-            //converts all special chars to their % equivalents for URLs
-            String encodedSerchString = URLEncoder.encode(searchString, "utf-8");
-
-            HttpClient client = new DefaultHttpClient();
-            //TODO: format the search string for the comicbookdb search
-            String url = "http://mobile.comicbookdb.com/search.php?form_search=" + encodedSerchString + "&form_searchtype=Title";
-            HttpGet request = new HttpGet(url);
-            HttpResponse response = client.execute(request);
-            InputStream in = response.getEntity().getContent();
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-            StringBuilder str = new StringBuilder();
-            String line = null;
-            while((line = reader.readLine()) != null)
-            {
-                str.append(line);
-            }
-            in.close();
-
-
-            String html = str.toString();
-
-
-            //find all links to tiltes in the search
-            //NOTE: \\p{P} is supposedly all punctuation
-            Pattern pattern = Pattern.compile("<a href=\"title.php\\?ID=(\\d+)\">([\\w\\s\\p{P}]+)\\((\\d+)\\)</a>\\s*\\(([\\w\\s]+)\\)\\s*<br>");
-
-            Matcher matcher = pattern.matcher(html);
-            while(matcher.find()) {
-                //fromHTML decodes all HTML special chars to printable chars (e.g. amp; to &)
-                searchResults.add( Html.fromHtml(matcher.group(2)).toString() + " " + Html.fromHtml(matcher.group(3)).toString());
-            }
-        } catch (Exception ex) {
-            String e = ex.toString();
-        }
-
-
-        return searchResults;
-    }
 
     public Cursor RefreshListCursor(){
         SQLiteDatabase db = mBackIssuesDatabase.getReadableDatabase();
@@ -312,34 +269,14 @@ public class ComicSeriesListingActivity extends FragmentActivity {
         startActivity(intent);
     }
 
-
     public void removeComicSeries(int seriesID) {
-        try {
-            //todo: see if series already in database before adding again
-            SQLiteDatabase db = mBackIssuesDatabase.getWritableDatabase();
-
-            //delete all items from issue table first
-            String whereClause = ComicSeriesContract.ComicIssueEntry.COLUMN_SERIES_ID + "=" + seriesID;
-            db.delete( ComicSeriesContract.ComicIssueEntry.TABLE_NAME,
-                    whereClause,
-                    null
-            );
-
-            //now remove series from series table
-            whereClause = ComicSeriesContract.ComicSeriesEntry._ID + "=" + seriesID;
-            db.delete(ComicSeriesContract.ComicSeriesEntry.TABLE_NAME,
-                    whereClause,
-                    null
-            );
-
-        }catch (Exception e) {
-            //todo: do something meaningful
-            String ex = e.toString();
+        if(missingSeries.removeComicSeries(seriesID)) {
+            ListView lv = (ListView) findViewById(R.id.comic_series_list);
+            ((CursorAdapter) lv.getAdapter()).changeCursor(RefreshListCursor());
+            lv.requestFocus();
+        } else {
+            Toast.makeText(this, "Failed to remove series", Toast.LENGTH_LONG).show();
         }
-
-        ListView lv = (ListView)findViewById(R.id.comic_series_list);
-        ((CursorAdapter)lv.getAdapter()).changeCursor(RefreshListCursor());
-        lv.requestFocus();
     }
 
 

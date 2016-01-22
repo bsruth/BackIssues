@@ -3,10 +3,22 @@ package brian.ruth.backissues;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.text.Html;
 import android.view.View;
 import android.widget.EditText;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by bsruth on 1/22/16.
@@ -74,5 +86,77 @@ public class MissingSeries {
         } else {
             return true;
         }
+    }
+
+    public ArrayList<String> searchComicBookDB(String searchString) {
+
+        ArrayList<String> searchResults = new ArrayList<String>();
+
+        try {
+            //converts all special chars to their % equivalents for URLs
+            String encodedSerchString = URLEncoder.encode(searchString, "utf-8");
+
+            HttpClient client = new DefaultHttpClient();
+            //TODO: format the search string for the comicbookdb search
+            String url = "http://mobile.comicbookdb.com/search.php?form_search=" + encodedSerchString + "&form_searchtype=Title";
+            HttpGet request = new HttpGet(url);
+            HttpResponse response = client.execute(request);
+            InputStream in = response.getEntity().getContent();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            StringBuilder str = new StringBuilder();
+            String line = null;
+            while((line = reader.readLine()) != null)
+            {
+                str.append(line);
+            }
+            in.close();
+
+
+            String html = str.toString();
+
+
+            //find all links to tiltes in the search
+            //NOTE: \\p{P} is supposedly all punctuation
+            Pattern pattern = Pattern.compile("<a href=\"title.php\\?ID=(\\d+)\">([\\w\\s\\p{P}]+)\\((\\d+)\\)</a>\\s*\\(([\\w\\s]+)\\)\\s*<br>");
+
+            Matcher matcher = pattern.matcher(html);
+            while(matcher.find()) {
+                //fromHTML decodes all HTML special chars to printable chars (e.g. amp; to &)
+                searchResults.add( Html.fromHtml(matcher.group(2)).toString() + " " + Html.fromHtml(matcher.group(3)).toString());
+            }
+        } catch (Exception ex) {
+            String e = ex.toString();
+        }
+
+
+        return searchResults;
+    }
+
+    public boolean removeComicSeries(int seriesID) {
+        try {
+            //todo: see if series already in database before adding again
+            SQLiteDatabase db = backIssuesDatabase.getWritableDatabase();
+
+            //delete all items from issue table first
+            String whereClause = ComicSeriesContract.ComicIssueEntry.COLUMN_SERIES_ID + "=" + seriesID;
+            db.delete( ComicSeriesContract.ComicIssueEntry.TABLE_NAME,
+                    whereClause,
+                    null
+            );
+
+            //now remove series from series table
+            whereClause = ComicSeriesContract.ComicSeriesEntry._ID + "=" + seriesID;
+            db.delete(ComicSeriesContract.ComicSeriesEntry.TABLE_NAME,
+                    whereClause,
+                    null
+            );
+
+        }catch (Exception e) {
+            //todo: do something meaningful
+            String ex = e.toString();
+            return false;
+        }
+        return true;
     }
 }
