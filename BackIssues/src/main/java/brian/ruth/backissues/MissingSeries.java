@@ -159,4 +159,41 @@ public class MissingSeries {
         }
         return true;
     }
+
+    public Cursor getFilteredCursor(String filterText){
+        SQLiteDatabase db = backIssuesDatabase.getReadableDatabase();
+
+
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                ComicSeriesContract.ComicSeriesEntry._ID,
+                ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE
+        };
+
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE + " COLLATE NOCASE ASC;";
+
+        String row_select = null;
+        if(filterText != "") {
+            row_select = "UPPER(" + ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE + ") LIKE UPPER('%" +
+                    filterText + "%')";
+
+        }
+
+        Cursor c = db.query(
+                ComicSeriesContract.ComicSeriesEntry.TABLE_NAME,  // The table to query
+                projection,                               // The columns to return
+                row_select,                                // The columns for the WHERE clause
+                null,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                sortOrder                                 // The sort order
+        );
+
+        return c;
+    }
 }
