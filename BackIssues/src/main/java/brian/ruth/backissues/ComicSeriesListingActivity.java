@@ -63,17 +63,15 @@ public class ComicSeriesListingActivity extends FragmentActivity {
         mBackIssuesDatabase = new BackIssuesDBHelper(this);
         missingSeries = new MissingSeries(mBackIssuesDatabase);
 
-        Cursor c = refreshSeriesCursor();
-
         final ListView lv = (ListView)findViewById(R.id.comic_series_list);
 
 
 
         String[] uiBindFrom = {ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE};
         int[] uiBindTo = {R.id.comic_series_list_item_title};
-        adapter = new ComicSeriesCursorAdapter(this, c, true);
+        Cursor seriesCursor = missingSeries.getFilteredCursor("");
+        adapter = new ComicSeriesCursorAdapter(this, seriesCursor, true);
         adapter.db = mBackIssuesDatabase.getReadableDatabase();
-
         lv.setAdapter(adapter);
 
         //single click to see the issues for a series
@@ -109,10 +107,6 @@ public class ComicSeriesListingActivity extends FragmentActivity {
                                 //Yes button clicked
                                 removeComicSeries(seriesID);
                                 break;
-
-                            case DialogInterface.BUTTON_NEGATIVE:
-                                //No button clicked
-                                break;
                         }
                     }
                 };
@@ -143,8 +137,7 @@ public class ComicSeriesListingActivity extends FragmentActivity {
         public void onTextChanged(CharSequence s, int start, int before,
                                   int count) {
 
-            ListView lv = (ListView)findViewById(R.id.comic_series_list);
-            ((CursorAdapter)lv.getAdapter()).changeCursor(refreshSeriesCursor());
+            refreshSeriesList(refreshSeriesCursor());
         }
     };
 
@@ -157,8 +150,7 @@ public class ComicSeriesListingActivity extends FragmentActivity {
         //refresh the list in case an item was added or removed from
         //a series
         //todo: only update when a change is made, or only update the changed item, not the whole list
-        final ListView lv = (ListView)findViewById(R.id.comic_series_list);
-        ((BaseAdapter)(lv.getAdapter())).notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
 
     }
 
@@ -174,15 +166,10 @@ public class ComicSeriesListingActivity extends FragmentActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_backupDB:
-                BackupManager bm = new BackupManager(this);
-                bm.dataChanged();
                 BackupToSDCard();
                 return true;
             case R.id.action_restoreDB:
                 RestoreFromSDCard();
-            //    BackupManager bm2 = new BackupManager(this);
-             //   int retVal = bm2.requestRestore();
-              // return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -200,8 +187,7 @@ public class ComicSeriesListingActivity extends FragmentActivity {
         if(BackupDBUtilities.RestoreFromSDCard(mBackIssuesDatabase.DB_PATH)) {
             mBackIssuesDatabase.close();
             mBackIssuesDatabase = new BackIssuesDBHelper(this);
-            ListView lv = (ListView)findViewById(R.id.comic_series_list);
-            ((CursorAdapter)lv.getAdapter()).changeCursor(refreshSeriesCursor());
+            refreshSeriesList(refreshSeriesCursor());
 
             Toast.makeText(this, "DB Restored!", Toast.LENGTH_LONG).show();
         } else {
@@ -215,6 +201,11 @@ public class ComicSeriesListingActivity extends FragmentActivity {
         EditText editText = (EditText) findViewById(R.id.comic_series_text_entry);
         String filterText = editText.getText().toString();
        return missingSeries.getFilteredCursor(filterText);
+    }
+
+    public void refreshSeriesList(Cursor seriesCursor) {
+        ListView lv = (ListView)findViewById(R.id.comic_series_list);
+        adapter.changeCursor(seriesCursor);
     }
 
     /** Called when the user clicks the Send button*/
@@ -238,8 +229,7 @@ public class ComicSeriesListingActivity extends FragmentActivity {
 
     public void removeComicSeries(int seriesID) {
         if(missingSeries.removeComicSeries(seriesID)) {
-            ListView lv = (ListView)findViewById(R.id.comic_series_list);
-            ((CursorAdapter)lv.getAdapter()).changeCursor(refreshSeriesCursor());
+            refreshSeriesList(refreshSeriesCursor());
         } else {
             Toast.makeText(this, "Failed to remove series", Toast.LENGTH_LONG).show();
         }
