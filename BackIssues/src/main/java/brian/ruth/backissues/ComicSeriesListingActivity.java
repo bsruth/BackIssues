@@ -63,7 +63,7 @@ public class ComicSeriesListingActivity extends FragmentActivity {
         mBackIssuesDatabase = new BackIssuesDBHelper(this);
         missingSeries = new MissingSeries(mBackIssuesDatabase);
 
-        Cursor c = RefreshListCursor();
+        Cursor c = refreshSeriesCursor();
 
         final ListView lv = (ListView)findViewById(R.id.comic_series_list);
 
@@ -144,7 +144,7 @@ public class ComicSeriesListingActivity extends FragmentActivity {
                                   int count) {
 
             ListView lv = (ListView)findViewById(R.id.comic_series_list);
-            ((CursorAdapter)lv.getAdapter()).changeCursor(RefreshListCursor());
+            ((CursorAdapter)lv.getAdapter()).changeCursor(refreshSeriesCursor());
         }
     };
 
@@ -201,7 +201,7 @@ public class ComicSeriesListingActivity extends FragmentActivity {
             mBackIssuesDatabase.close();
             mBackIssuesDatabase = new BackIssuesDBHelper(this);
             ListView lv = (ListView)findViewById(R.id.comic_series_list);
-            ((CursorAdapter)lv.getAdapter()).changeCursor(RefreshListCursor());
+            ((CursorAdapter)lv.getAdapter()).changeCursor(refreshSeriesCursor());
 
             Toast.makeText(this, "DB Restored!", Toast.LENGTH_LONG).show();
         } else {
@@ -210,44 +210,11 @@ public class ComicSeriesListingActivity extends FragmentActivity {
     }
 
 
-    public Cursor RefreshListCursor(){
-        SQLiteDatabase db = mBackIssuesDatabase.getReadableDatabase();
+    public Cursor refreshSeriesCursor(){
 
-
-
-        // Define a projection that specifies which columns from the database
-        // you will actually use after this query.
-        String[] projection = {
-                ComicSeriesContract.ComicSeriesEntry._ID,
-                ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE
-        };
-
-
-        // How you want the results sorted in the resulting Cursor
-        String sortOrder =
-                ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE + " COLLATE NOCASE ASC;";
-
-        //see if we need to filter the cursor based on the current filter text
         EditText editText = (EditText) findViewById(R.id.comic_series_text_entry);
         String filterText = editText.getText().toString();
-        String row_select = null;
-        if(filterText != "") {
-            row_select = "UPPER(" + ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE + ") LIKE UPPER('%" +
-                    filterText + "%')";
-
-        }
-
-        Cursor c = db.query(
-                ComicSeriesContract.ComicSeriesEntry.TABLE_NAME,  // The table to query
-                projection,                               // The columns to return
-                row_select,                                // The columns for the WHERE clause
-                null,                            // The values for the WHERE clause
-                null,                                     // don't group the rows
-                null,                                     // don't filter by row groups
-                sortOrder                                 // The sort order
-        );
-
-        return c;
+       return missingSeries.getFilteredCursor(filterText);
     }
 
     /** Called when the user clicks the Send button*/
@@ -271,9 +238,8 @@ public class ComicSeriesListingActivity extends FragmentActivity {
 
     public void removeComicSeries(int seriesID) {
         if(missingSeries.removeComicSeries(seriesID)) {
-            ListView lv = (ListView) findViewById(R.id.comic_series_list);
-            ((CursorAdapter) lv.getAdapter()).changeCursor(RefreshListCursor());
-            lv.requestFocus();
+            ListView lv = (ListView)findViewById(R.id.comic_series_list);
+            ((CursorAdapter)lv.getAdapter()).changeCursor(refreshSeriesCursor());
         } else {
             Toast.makeText(this, "Failed to remove series", Toast.LENGTH_LONG).show();
         }
