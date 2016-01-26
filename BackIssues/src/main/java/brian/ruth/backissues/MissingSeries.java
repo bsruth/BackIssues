@@ -1,10 +1,12 @@
 package brian.ruth.backissues;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.Html;
 import android.view.View;
+import android.widget.CursorAdapter;
 import android.widget.EditText;
 
 import org.apache.http.HttpResponse;
@@ -27,12 +29,20 @@ public class MissingSeries {
 
     public static long INVALID_SERIES_ID = -1;
     private BackIssuesDBHelper backIssuesDatabase;
+    private ComicSeriesCursorAdapter adapter = null;
 
-    public MissingSeries(BackIssuesDBHelper database) {
-       backIssuesDatabase = database;
+    public MissingSeries(Context context, BackIssuesDBHelper database) {
+        backIssuesDatabase = database;
+        Cursor seriesCursor = getFilteredCursor("");
+        adapter = new ComicSeriesCursorAdapter(context, seriesCursor, true);
+        adapter.db = backIssuesDatabase.getReadableDatabase();
     }
 
-    /** Called when the user clicks the Send button*/
+    public CursorAdapter getCursorAdapter() {
+        return adapter;
+    }
+
+
     public long addComicSeries(String seriesTitle) {
 
         //ArrayList<String> searchResults =  searchComicBookDB(seriesTitle);
@@ -160,7 +170,7 @@ public class MissingSeries {
         return true;
     }
 
-    public Cursor getFilteredCursor(String filterText){
+    private Cursor getFilteredCursor(String filterText) {
         SQLiteDatabase db = backIssuesDatabase.getReadableDatabase();
 
 
@@ -184,7 +194,7 @@ public class MissingSeries {
 
         }
 
-        Cursor c = db.query(
+        Cursor seriesCursor = db.query(
                 ComicSeriesContract.ComicSeriesEntry.TABLE_NAME,  // The table to query
                 projection,                               // The columns to return
                 row_select,                                // The columns for the WHERE clause
@@ -194,6 +204,10 @@ public class MissingSeries {
                 sortOrder                                 // The sort order
         );
 
-        return c;
+        return seriesCursor;
+    }
+
+    public void filterSeriesList(String filterText){
+        adapter.changeCursor(getFilteredCursor(filterText));
     }
 }

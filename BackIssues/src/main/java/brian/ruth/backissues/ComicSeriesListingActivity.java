@@ -49,7 +49,6 @@ public class ComicSeriesListingActivity extends FragmentActivity {
 
     //members
     private BackIssuesDBHelper mBackIssuesDatabase; //database used for entire app
-    private ComicSeriesCursorAdapter adapter = null;
     private MissingSeries missingSeries = null;
 
     @Override
@@ -61,18 +60,14 @@ public class ComicSeriesListingActivity extends FragmentActivity {
         textEntry.addTextChangedListener(filterTextWatcher);
 
         mBackIssuesDatabase = new BackIssuesDBHelper(this);
-        missingSeries = new MissingSeries(mBackIssuesDatabase);
+        missingSeries = new MissingSeries(this, mBackIssuesDatabase);
 
         final ListView lv = (ListView)findViewById(R.id.comic_series_list);
 
 
-
         String[] uiBindFrom = {ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE};
         int[] uiBindTo = {R.id.comic_series_list_item_title};
-        Cursor seriesCursor = missingSeries.getFilteredCursor("");
-        adapter = new ComicSeriesCursorAdapter(this, seriesCursor, true);
-        adapter.db = mBackIssuesDatabase.getReadableDatabase();
-        lv.setAdapter(adapter);
+        lv.setAdapter(missingSeries.getCursorAdapter());
 
         //single click to see the issues for a series
         lv.setClickable(true);
@@ -137,7 +132,7 @@ public class ComicSeriesListingActivity extends FragmentActivity {
         public void onTextChanged(CharSequence s, int start, int before,
                                   int count) {
 
-            refreshSeriesList(refreshSeriesCursor());
+            missingSeries.filterSeriesList(s.toString());
         }
     };
 
@@ -146,12 +141,7 @@ public class ComicSeriesListingActivity extends FragmentActivity {
     @Override
     public void onResume() {
         super.onResume();
-
-        //refresh the list in case an item was added or removed from
-        //a series
-        //todo: only update when a change is made, or only update the changed item, not the whole list
-        adapter.notifyDataSetChanged();
-
+        missingSeries.filterSeriesList(getFilterText());
     }
 
     @Override
@@ -187,7 +177,7 @@ public class ComicSeriesListingActivity extends FragmentActivity {
         if(BackupDBUtilities.RestoreFromSDCard(mBackIssuesDatabase.DB_PATH)) {
             mBackIssuesDatabase.close();
             mBackIssuesDatabase = new BackIssuesDBHelper(this);
-            refreshSeriesList(refreshSeriesCursor());
+            missingSeries.filterSeriesList(getFilterText());
 
             Toast.makeText(this, "DB Restored!", Toast.LENGTH_LONG).show();
         } else {
@@ -195,18 +185,12 @@ public class ComicSeriesListingActivity extends FragmentActivity {
         }
     }
 
-
-    public Cursor refreshSeriesCursor(){
-
+    public String getFilterText() {
         EditText editText = (EditText) findViewById(R.id.comic_series_text_entry);
         String filterText = editText.getText().toString();
-       return missingSeries.getFilteredCursor(filterText);
+        return filterText;
     }
 
-    public void refreshSeriesList(Cursor seriesCursor) {
-        ListView lv = (ListView)findViewById(R.id.comic_series_list);
-        adapter.changeCursor(seriesCursor);
-    }
 
     /** Called when the user clicks the Send button*/
     public void addComicSeries(View view) {
@@ -229,7 +213,7 @@ public class ComicSeriesListingActivity extends FragmentActivity {
 
     public void removeComicSeries(int seriesID) {
         if(missingSeries.removeComicSeries(seriesID)) {
-            refreshSeriesList(refreshSeriesCursor());
+            missingSeries.filterSeriesList(getFilterText());
         } else {
             Toast.makeText(this, "Failed to remove series", Toast.LENGTH_LONG).show();
         }
