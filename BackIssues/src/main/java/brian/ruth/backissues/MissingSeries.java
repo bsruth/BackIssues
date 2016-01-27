@@ -19,6 +19,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,6 +34,7 @@ public class MissingSeries {
     public static long INVALID_SERIES_ID = -1;
     private BackIssuesDBHelper backIssuesDatabase;
     private ComicSeriesCursorAdapter adapter = null;
+    private List<ComicSeries> seriesList = new ArrayList<ComicSeries>();
 
     public MissingSeries(Context context, BackIssuesDBHelper database) {
         backIssuesDatabase = database;
@@ -45,7 +50,7 @@ public class MissingSeries {
 
     public long addComicSeries(String seriesTitle) {
 
-        //ArrayList<String> searchResults =  searchComicBookDB(seriesTitle);
+        //ArrayList<String> searchResults =  searchComicBookDB(title);
 
         long newRowID = -1;
         try {

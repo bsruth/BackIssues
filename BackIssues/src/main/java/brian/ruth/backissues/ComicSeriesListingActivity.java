@@ -1,45 +1,20 @@
 package brian.ruth.backissues;
 
 import android.app.AlertDialog;
-import android.app.backup.BackupManager;
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
-import android.text.Html;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URLEncoder;
-import java.nio.channels.FileChannel;
-import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ComicSeriesListingActivity extends FragmentActivity {
 
@@ -77,7 +52,10 @@ public class ComicSeriesListingActivity extends FragmentActivity {
                 Cursor c2 = (Cursor)lv.getItemAtPosition(i);
                 long seriesID = c2.getLong(c2.getColumnIndex(ComicSeriesContract.ComicSeriesEntry._ID));
                 String seriesTitle = c2.getString(c2.getColumnIndex(ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE));
-               openComicDetailListingActivity(view, seriesTitle, seriesID);
+                ComicSeries comicSeries = new ComicSeries();
+                comicSeries.id = seriesID;
+                comicSeries.title = seriesTitle;
+               openComicDetailListingActivity(view, comicSeries);
             }
         });
 
@@ -200,14 +178,16 @@ public class ComicSeriesListingActivity extends FragmentActivity {
         long newSeriesID = missingSeries.addComicSeries(seriesTitle);
         if(newSeriesID != MissingSeries.INVALID_SERIES_ID) {
             editText.setText("");
-            openComicDetailListingActivity(view, seriesTitle, newSeriesID);
+            ComicSeries comicSeries = new ComicSeries();
+            comicSeries.id = newSeriesID;
+            comicSeries.title = seriesTitle;
+            openComicDetailListingActivity(view, comicSeries);
         }
     }
 
-    private void openComicDetailListingActivity(View view, String seriesTitle, long seriesID) {
+    private void openComicDetailListingActivity(View view, ComicSeries comicSeries) {
         Intent intent = new Intent(view.getContext(), ComicDetailListingActivity.class);
-        intent.putExtra(SELECTED_COMIC_SERIES_ID, Long.toString(seriesID));
-        intent.putExtra(SELECTED_COMIC_SERIES_TITLE, seriesTitle);
+        intent.putExtra("series", comicSeries);
         startActivity(intent);
     }
 

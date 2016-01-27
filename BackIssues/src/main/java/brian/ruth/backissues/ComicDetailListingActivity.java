@@ -34,7 +34,7 @@ public class ComicDetailListingActivity extends Activity {
 
     //members
     private BackIssuesDBHelper mBackIssuesDatabase;
-    private String mSeriesID;
+    private ComicSeries currentSeries;
     //todo: should be an enum
     private int mVisibilityState;
 
@@ -45,11 +45,10 @@ public class ComicDetailListingActivity extends Activity {
 
         //get intent
         Intent intent = getIntent();
-        mSeriesID = intent.getStringExtra(ComicSeriesListingActivity.SELECTED_COMIC_SERIES_ID);
-        String seriesTitle = intent.getStringExtra(ComicSeriesListingActivity.SELECTED_COMIC_SERIES_TITLE);
+        currentSeries = (ComicSeries)intent.getSerializableExtra("series");
 
         setContentView(R.layout.activity_comic_detail_listing);
-        setTitle(seriesTitle);
+        setTitle(currentSeries.title);
 
         EditText textEntry = (EditText) findViewById(R.id.comic_issues_text_entry);
         textEntry.addTextChangedListener(filterTextWatcher);
@@ -240,7 +239,7 @@ public class ComicDetailListingActivity extends Activity {
 
         //String sortOrder =
         //        ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER + " ASC;";
-        String rowSelection = ComicSeriesContract.ComicIssueEntry.COLUMN_SERIES_ID + "=" + mSeriesID;
+        String rowSelection = ComicSeriesContract.ComicIssueEntry.COLUMN_SERIES_ID + "=" + currentSeries.id;
 
         //see if we need to filter the cursor based on the current filter text
         EditText editText = (EditText) findViewById(R.id.comic_issues_text_entry);
@@ -285,7 +284,7 @@ public class ComicDetailListingActivity extends Activity {
                 String issueToAdd = issuesToAdd.get(issue);
                 if(isDuplicateOrEmptyIssue(issueToAdd, db) == false){
                     ContentValues values = new ContentValues();
-                    values.put(ComicSeriesContract.ComicIssueEntry.COLUMN_SERIES_ID, mSeriesID);
+                    values.put(ComicSeriesContract.ComicIssueEntry.COLUMN_SERIES_ID, currentSeries.id);
                     values.put(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER, issueToAdd);
                     values.put(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_CHECKED_OFF, BackIssuesDBHelper.SQL_FALSE);
 
@@ -341,7 +340,7 @@ public class ComicDetailListingActivity extends Activity {
 
         String[] projection = { ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER};
         String rowSelectionQuery = " UPPER(" + ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER + ") = UPPER('" + issue + "') " +
-                "AND " + ComicSeriesContract.ComicIssueEntry.COLUMN_SERIES_ID + "=" + mSeriesID;
+                "AND " + ComicSeriesContract.ComicIssueEntry.COLUMN_SERIES_ID + "=" + currentSeries.id;
         Cursor c =  db.query(
                 ComicSeriesContract.ComicIssueEntry.TABLE_NAME,  // The table to query
                 projection,                               // The columns to return
