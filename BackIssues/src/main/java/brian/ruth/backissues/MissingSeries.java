@@ -36,8 +36,10 @@ public class MissingSeries {
     private ComicSeriesCursorAdapter adapter = null;
     private List<ComicSeries> seriesList = new ArrayList<ComicSeries>();
 
-    public MissingSeries(Context context, BackIssuesDBHelper database) {
-        backIssuesDatabase = database;
+    public MissingSeries(Context context) {
+        BackIssuesApplication backIssuesApp =
+                (BackIssuesApplication)context.getApplicationContext();
+        backIssuesDatabase = backIssuesApp.getDatabase();
         Cursor seriesCursor = getFilteredCursor("");
         adapter = new ComicSeriesCursorAdapter(context, seriesCursor, true);
         adapter.db = backIssuesDatabase.getReadableDatabase();

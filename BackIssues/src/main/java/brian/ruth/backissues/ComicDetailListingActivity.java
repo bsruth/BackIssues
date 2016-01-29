@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,15 +46,17 @@ public class ComicDetailListingActivity extends Activity {
 
         //get intent
         Intent intent = getIntent();
-        currentSeries = (ComicSeries)intent.getSerializableExtra("series");
+        String title = intent.getStringExtra(ComicSeriesListingActivity.SELECTED_COMIC_SERIES_TITLE);
+        long id = intent.getLongExtra(ComicSeriesListingActivity.SELECTED_COMIC_SERIES_ID, -1);
+        BackIssuesApplication backIssuesApp = (BackIssuesApplication)getApplicationContext();
+        mBackIssuesDatabase = backIssuesApp.getDatabase();
+        currentSeries = new ComicSeries(title, id, mBackIssuesDatabase);
 
         setContentView(R.layout.activity_comic_detail_listing);
-        setTitle(currentSeries.title);
+        setTitle(currentSeries.getTitle());
 
         EditText textEntry = (EditText) findViewById(R.id.comic_issues_text_entry);
         textEntry.addTextChangedListener(filterTextWatcher);
-
-        mBackIssuesDatabase = new BackIssuesDBHelper(this);
 
         //we want to remove all crossed off items on create so that
         //if we accidentally cross off an item, it is still shown until
@@ -239,7 +242,7 @@ public class ComicDetailListingActivity extends Activity {
 
         //String sortOrder =
         //        ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER + " ASC;";
-        String rowSelection = ComicSeriesContract.ComicIssueEntry.COLUMN_SERIES_ID + "=" + currentSeries.id;
+        String rowSelection = ComicSeriesContract.ComicIssueEntry.COLUMN_SERIES_ID + "=" + currentSeries.getID();
 
         //see if we need to filter the cursor based on the current filter text
         EditText editText = (EditText) findViewById(R.id.comic_issues_text_entry);
@@ -274,87 +277,14 @@ public class ComicDetailListingActivity extends Activity {
     public void addComicIssue(View view) {
         EditText editText = (EditText) findViewById(R.id.comic_issues_text_entry);
         String issueNumber = editText.getText().toString();
-
-        //parse to see if we are adding a list
-        ArrayList<String> issuesToAdd = ParseIssuesToAdd(issueNumber);
-        try {
-            //todo: see if series already in database before adding again
-            SQLiteDatabase db = mBackIssuesDatabase.getWritableDatabase();
-            for(int issue = 0; issue < issuesToAdd.size(); ++issue ) {
-                String issueToAdd = issuesToAdd.get(issue);
-                if(isDuplicateOrEmptyIssue(issueToAdd, db) == false){
-                    ContentValues values = new ContentValues();
-                    values.put(ComicSeriesContract.ComicIssueEntry.COLUMN_SERIES_ID, currentSeries.id);
-                    values.put(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER, issueToAdd);
-                    values.put(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_CHECKED_OFF, BackIssuesDBHelper.SQL_FALSE);
-
-
-                    long newRowID = db.insert(ComicSeriesContract.ComicIssueEntry.TABLE_NAME, "null", values);
-                }
-            }
-        }catch (Exception e) {
-            //todo: do something meaningful
-            String ex = e.toString();
-            int i = 0;
+        if(currentSeries.addComicIssue(issueNumber) == false) {
+            Toast.makeText(this, "Failed to add series: " + issueNumber,
+                    Toast.LENGTH_LONG).show();
         }
 
         editText.setText("");
         ListView lv = (ListView)findViewById(R.id.comic_issue_list);
         ((CursorAdapter)lv.getAdapter()).changeCursor(RefreshListCursor());
         editText.requestFocus();
-    }
-
-    //** used to add a group of issues at once
-    private ArrayList<String> ParseIssuesToAdd(String addString)
-    {
-        ArrayList<String> issuesToAdd = new ArrayList<String>();
-
-        //todo: doesn't handle decimal issues or things like "annual 1 - 10"
-        Pattern pattern = Pattern.compile("(\\d+)\\s*\\-\\s*(\\d+)");
-
-        Matcher matcher = pattern.matcher(addString);
-        if(matcher.matches()) {
-            int startNumber = Integer.parseInt(matcher.group(1));
-            int endNumber = Integer.parseInt(matcher.group(2));
-
-            for(int issueNumber = startNumber; issueNumber <= endNumber; ++issueNumber){
-                issuesToAdd.add(String.valueOf(issueNumber) );
-            }
-        } else {
-            //wasn't a range add, just put in the text passed to this function
-            issuesToAdd.add(addString);
-        }
-
-
-        return issuesToAdd;
-    }
-
-
-    private boolean isDuplicateOrEmptyIssue(String issue, SQLiteDatabase db)
-    {
-        //check empty or all whitespace
-        //todo: ensure it looks like a valid issue e.g. ".@@@7f" is probably invalid
-        if(issue.trim().length() == 0 ){
-            return true;
-        }
-
-        String[] projection = { ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER};
-        String rowSelectionQuery = " UPPER(" + ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER + ") = UPPER('" + issue + "') " +
-                "AND " + ComicSeriesContract.ComicIssueEntry.COLUMN_SERIES_ID + "=" + currentSeries.id;
-        Cursor c =  db.query(
-                ComicSeriesContract.ComicIssueEntry.TABLE_NAME,  // The table to query
-                projection,                               // The columns to return
-                rowSelectionQuery,                                // The columns for the WHERE clause
-                null,                            // The values for the WHERE clause
-                null,                                     // don't group the rows
-                null,                                     // don't filter by row groups
-                null                                 // The sort order
-        );
-
-        if(c.getCount() == 0) {
-            return false; //nothing matches this item
-        } else {
-            return true;
-        }
     }
 }

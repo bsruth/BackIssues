@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 public class ComicSeriesListingActivity extends FragmentActivity {
 
-    //activity messages
     public final static String SELECTED_COMIC_SERIES_ID = "brian.ruth.backissues.SELECTED_COMIC_SERIES_ID";
     public final static String SELECTED_COMIC_SERIES_TITLE = "brian.ruth.backissues.SELECTED_COMIC_SERIES_TITLE";
 
@@ -29,14 +28,18 @@ public class ComicSeriesListingActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        BackIssuesApplication backIssuesApp = (BackIssuesApplication)getApplicationContext();
+        backIssuesApp.setDatabase(new BackIssuesDBHelper(this));
+
         setContentView(R.layout.activity_comic_series_listing);
 
         EditText textEntry = (EditText) findViewById(R.id.comic_series_text_entry);
         textEntry.addTextChangedListener(filterTextWatcher);
 
-        mBackIssuesDatabase = new BackIssuesDBHelper(this);
-        missingSeries = new MissingSeries(this, mBackIssuesDatabase);
+        mBackIssuesDatabase = backIssuesApp.getDatabase();
 
+        missingSeries = new MissingSeries(this);
         final ListView lv = (ListView)findViewById(R.id.comic_series_list);
 
 
@@ -52,10 +55,7 @@ public class ComicSeriesListingActivity extends FragmentActivity {
                 Cursor c2 = (Cursor)lv.getItemAtPosition(i);
                 long seriesID = c2.getLong(c2.getColumnIndex(ComicSeriesContract.ComicSeriesEntry._ID));
                 String seriesTitle = c2.getString(c2.getColumnIndex(ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE));
-                ComicSeries comicSeries = new ComicSeries();
-                comicSeries.id = seriesID;
-                comicSeries.title = seriesTitle;
-               openComicDetailListingActivity(view, comicSeries);
+               openComicDetailListingActivity(view, seriesID, seriesTitle);
             }
         });
 
@@ -178,16 +178,16 @@ public class ComicSeriesListingActivity extends FragmentActivity {
         long newSeriesID = missingSeries.addComicSeries(seriesTitle);
         if(newSeriesID != MissingSeries.INVALID_SERIES_ID) {
             editText.setText("");
-            ComicSeries comicSeries = new ComicSeries();
-            comicSeries.id = newSeriesID;
-            comicSeries.title = seriesTitle;
-            openComicDetailListingActivity(view, comicSeries);
+            ComicSeries comicSeries = new ComicSeries(seriesTitle, newSeriesID, mBackIssuesDatabase);
+            openComicDetailListingActivity(view, newSeriesID, seriesTitle);
         }
     }
 
-    private void openComicDetailListingActivity(View view, ComicSeries comicSeries) {
+    private void openComicDetailListingActivity(View view, long seriesID, String seriesTitle) {
+
         Intent intent = new Intent(view.getContext(), ComicDetailListingActivity.class);
-        intent.putExtra("series", comicSeries);
+        intent.putExtra(SELECTED_COMIC_SERIES_ID, seriesID);
+        intent.putExtra(SELECTED_COMIC_SERIES_TITLE, seriesTitle);
         startActivity(intent);
     }
 
