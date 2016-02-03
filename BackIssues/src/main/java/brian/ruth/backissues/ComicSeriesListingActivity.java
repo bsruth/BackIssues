@@ -42,9 +42,6 @@ public class ComicSeriesListingActivity extends FragmentActivity {
         missingSeries = new MissingSeries(this);
         final ListView lv = (ListView)findViewById(R.id.comic_series_list);
 
-
-        String[] uiBindFrom = {ComicSeriesContract.ComicSeriesEntry.COLUMN_NAME_TITLE};
-        int[] uiBindTo = {R.id.comic_series_list_item_title};
         lv.setAdapter(missingSeries.getCursorAdapter());
 
         //single click to see the issues for a series

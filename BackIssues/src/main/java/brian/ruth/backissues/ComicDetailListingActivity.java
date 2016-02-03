@@ -36,6 +36,7 @@ public class ComicDetailListingActivity extends Activity {
     //members
     private BackIssuesDBHelper mBackIssuesDatabase;
     private ComicSeries currentSeries;
+    private List<ComicSeries> mostRecentlyViewed = null;
     //todo: should be an enum
     private int mVisibilityState;
 
@@ -50,7 +51,11 @@ public class ComicDetailListingActivity extends Activity {
         long id = intent.getLongExtra(ComicSeriesListingActivity.SELECTED_COMIC_SERIES_ID, -1);
         BackIssuesApplication backIssuesApp = (BackIssuesApplication)getApplicationContext();
         mBackIssuesDatabase = backIssuesApp.getDatabase();
+
         currentSeries = new ComicSeries(title, id, mBackIssuesDatabase);
+        mostRecentlyViewed = backIssuesApp.getMostRecentlyViewedSeries();
+        backIssuesApp.pushRecentlyViewedSeries(currentSeries);
+
 
         setContentView(R.layout.activity_comic_detail_listing);
         setTitle(currentSeries.getTitle());
@@ -129,6 +134,9 @@ public class ComicDetailListingActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.comic_detail_listing_menu, menu);
+        for (ComicSeries comic : mostRecentlyViewed) {
+            menu.add(comic.getTitle());
+        }
         return true;
     }
 
