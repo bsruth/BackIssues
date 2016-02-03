@@ -54,11 +54,9 @@ public class ComicDetailListingActivity extends Activity {
 
         currentSeries = new ComicSeries(title, id, mBackIssuesDatabase);
         mostRecentlyViewed = backIssuesApp.getMostRecentlyViewedSeries();
-        backIssuesApp.pushRecentlyViewedSeries(currentSeries);
-
 
         setContentView(R.layout.activity_comic_detail_listing);
-        setTitle(currentSeries.getTitle());
+
 
         EditText textEntry = (EditText) findViewById(R.id.comic_issues_text_entry);
         textEntry.addTextChangedListener(filterTextWatcher);
@@ -69,34 +67,9 @@ public class ComicDetailListingActivity extends Activity {
         //it to the missing list.
         RemoveCrossedOffItems();
 
-        Cursor c = RefreshListCursor();
+        loadSeries(currentSeries);
 
         final ListView lv = (ListView)findViewById(R.id.comic_issue_list);
-
-        String[] uiBindFrom = {ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER, ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_CHECKED_OFF};
-        int[] uiBindTo = {R.id.comic_issue_list_item_title, R.id.comic_issue_list_item_title};
-        CursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.comic_issue_list_item_layout, c,uiBindFrom, uiBindTo);
-        ((SimpleCursorAdapter)adapter).setViewBinder(new SimpleCursorAdapter.ViewBinder() {
-            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
-                if (columnIndex == cursor.getColumnIndex(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_CHECKED_OFF)) {
-                    //if the comic is checked off, we will cross it out and make it a lighter color.
-                    if (cursor.getInt(columnIndex) > 0) {
-                        TextView tv = (TextView) view;
-                        SpannableString content = new SpannableString(cursor.getString(cursor.getColumnIndex(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER)));
-                        content.setSpan(new StrikethroughSpan(), 0, content.length(), 0);
-                        tv.setTextColor(Color.parseColor("#FFCCCCCC"));
-                        tv.setText(content);
-                    } else {
-                        TextView tv = (TextView) view;
-                        tv.setTextColor(Color.BLACK);
-                        tv.setText(cursor.getString(cursor.getColumnIndex(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER)));
-                    }
-                    return true;
-                }
-                return false;
-            }
-        });
-        lv.setAdapter(adapter);
 
         lv.setLongClickable(true);
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -130,6 +103,42 @@ public class ComicDetailListingActivity extends Activity {
         lv.requestFocus();
     }
 
+    private void loadSeries(ComicSeries series) {
+        currentSeries = series;
+        Cursor listCursor = RefreshListCursor();
+
+        final ListView lv = (ListView)findViewById(R.id.comic_issue_list);
+
+        String[] uiBindFrom = {ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER, ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_CHECKED_OFF};
+        int[] uiBindTo = {R.id.comic_issue_list_item_title, R.id.comic_issue_list_item_title};
+        CursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.comic_issue_list_item_layout, listCursor,uiBindFrom, uiBindTo);
+        ((SimpleCursorAdapter)adapter).setViewBinder(new SimpleCursorAdapter.ViewBinder() {
+            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+                if (columnIndex == cursor.getColumnIndex(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_CHECKED_OFF)) {
+                    //if the comic is checked off, we will cross it out and make it a lighter color.
+                    if (cursor.getInt(columnIndex) > 0) {
+                        TextView tv = (TextView) view;
+                        SpannableString content = new SpannableString(cursor.getString(cursor.getColumnIndex(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER)));
+                        content.setSpan(new StrikethroughSpan(), 0, content.length(), 0);
+                        tv.setTextColor(Color.parseColor("#FFCCCCCC"));
+                        tv.setText(content);
+                    } else {
+                        TextView tv = (TextView) view;
+                        tv.setTextColor(Color.BLACK);
+                        tv.setText(cursor.getString(cursor.getColumnIndex(ComicSeriesContract.ComicIssueEntry.COLUMN_ISSUE_NUMBER)));
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
+        lv.setAdapter(adapter);
+
+        BackIssuesApplication backIssuesApp = (BackIssuesApplication)getApplicationContext();
+        backIssuesApp.pushRecentlyViewedSeries(series);
+
+        setTitle(currentSeries.getTitle());
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -153,6 +162,13 @@ public class ComicDetailListingActivity extends Activity {
                 }
                 return true;
             default:
+                for(int seriesIndex = 0; seriesIndex < mostRecentlyViewed.size(); ++seriesIndex) {
+                    if(mostRecentlyViewed.get(seriesIndex).getTitle() == item.getTitle()) {
+                        loadSeries(mostRecentlyViewed.get(seriesIndex));
+
+                        break;
+                    }
+                }
                 return super.onOptionsItemSelected(item);
         }
     }
