@@ -24,6 +24,7 @@ public class ComicSeriesListingActivity extends FragmentActivity {
     //members
     private BackIssuesDBHelper mBackIssuesDatabase; //database used for entire app
     private MissingSeries missingSeries = null;
+    private ComicSeriesCursorAdapter adapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,8 @@ public class ComicSeriesListingActivity extends FragmentActivity {
         missingSeries = new MissingSeries(this);
         final ListView lv = (ListView)findViewById(R.id.comic_series_list);
 
-        lv.setAdapter(missingSeries.getCursorAdapter());
+        adapter = (ComicSeriesCursorAdapter) missingSeries.getCursorAdapter();
+        lv.setAdapter(adapter);
 
         //single click to see the issues for a series
         lv.setClickable(true);
@@ -116,6 +118,9 @@ public class ComicSeriesListingActivity extends FragmentActivity {
     @Override
     public void onResume() {
         super.onResume();
+        //TODO ComicSeriesCursorAdapter.bindView fails because the db is closed
+        BackIssuesApplication backIssuesApp = (BackIssuesApplication)getApplicationContext();
+        adapter.db = backIssuesApp.getDatabase().getReadableDatabase();
         missingSeries.filterSeriesList(getFilterText());
     }
 
